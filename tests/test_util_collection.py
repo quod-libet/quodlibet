@@ -19,8 +19,11 @@ from quodlibet import config, app
 from tests import TestCase, mkdtemp
 from quodlibet.formats import AudioFile as Fakesong
 from quodlibet.formats._audio import NUMERIC_ZERO_DEFAULT, PEOPLE
-from quodlibet.util.collection import (Album, Playlist, avg, bayesian_average,
-                                       FileBackedPlaylist, XSPFBackedPlaylist)
+from quodlibet.util.collection import (Album, Playlist, unweighted_average,
+                                       unweighted_bayesian_average, FileBackedPlaylist,
+                                       XSPFBackedPlaylist, weighted_average,
+                                       weighted_bayesian_average,
+                                       smoothed_length_weights_and_nums)
 from quodlibet.library.file import FileLibrary
 from quodlibet.util import format_rating
 
@@ -94,7 +97,10 @@ class TAlbum(TestCase):
         s.failUnlessEqual(album.comma("~#length~dummy"), "12 - d, e")
         s.failUnlessEqual(album.comma("~#rating~dummy"), "0.50 - d, e")
         s.failUnlessEqual(album.comma("~#length:sum~dummy"), "12 - d, e")
-        s.failUnlessEqual(album.comma("~#dummy2"), 5)
+
+        # zero length, so the only dummy2 value will be ignored
+        s.failUnlessEqual(album.comma("~#dummy2"), '')
+        s.failUnlessEqual(album.comma("~#dummy2:unweighted_avg"), 5)
         s.failUnlessEqual(album.comma("~#dummy3"), "")
 
     def test_internal_tags(s):
@@ -131,7 +137,7 @@ class TAlbum(TestCase):
         s.failUnlessEqual(album.get("~#lastplayed"), 88)
         s.failUnlessEqual(album.get("~#bitrate"), 200)
         s.failUnlessEqual(album.get("~#year"), 33)
-        s.failUnlessEqual(album.get("~#rating"), 0.3)
+        s.failUnlessEqual(album.get("~#rating:unweighted_avg"), 0.3)
         s.failUnlessEqual(album.get("~#originalyear"), 2002)
 
     def test_numeric_comma(self):
@@ -168,39 +174,59 @@ class TAlbum(TestCase):
         album.songs = set(songs)
         # One song should average to its own rating
         s.failUnlessEqual(album.get("~#rating:avg"), songs[0]("~#rating"))
-        # BAV should now be default for rating
         s.failUnlessEqual(album.get("~#rating:bav"), album.get("~#rating:avg"))
+
+        # with one song, unweighted should be equal to weighted
+        s.failUnlessEqual(album.get("~#rating:avg"),
+                          album.get("~#rating:unweighted_avg"))
+        s.failUnlessEqual(album.get("~#rating:avg"),
+                          album.get("~#rating:unweighted_bav"))
 
     def test_multiple_ratings(s):
         r1, r2 = 1.0, 0.5
-        songs = [Fakesong({"~#rating": r1}), Fakesong({"~#rating": r2})]
+        songs = [Fakesong({"~#rating": r1, "~#length": 5}),
+                 Fakesong({"~#rating": r2, "~#length": 10})]
         album = Album(songs[0])
         album.songs = set(songs)
         # Standard averaging still available
-        s.failUnlessEqual(album("~#rating:avg"), avg([r1, r2]))
+        s.failUnlessEqual(album("~#rating:unweighted_avg"),
+                          unweighted_average([r1, r2]))
 
         # C = 0.0 => emulate arithmetic mean
         config.set("settings", "bayesian_rating_factor", 0.0)
         s.failUnlessEqual(album("~#rating:bav"), album("~#rating:avg"))
+        s.failUnlessEqual(album("~#rating:unweighted_bav"),
+                          album("~#rating:unweighted_avg"))
+
+        weights, nums = smoothed_length_weights_and_nums(songs,
+            "~#rating", total_length=5 + 10, smoothing_factor=10.0)
+        expected = weighted_average(nums, weights)
+        s.failUnlessEqual(album("~#rating:avg"), expected)
 
     def test_bayesian_multiple_ratings(s):
         # separated from above to avoid caching
         c, r1, r2 = 5, 1.0, 0.5
-        songs = [Fakesong({"~#rating": r1}), Fakesong({"~#rating": r2})]
+        songs = [Fakesong({"~#rating": r1, "~#length": 5}),
+                 Fakesong({"~#rating": r2, "~#length": 17})]
         album = Album(songs[0])
         album.songs = set(songs)
 
         config.set("settings", "bayesian_rating_factor", float(c))
         s.failUnlessEqual(
             config.getfloat("settings", "bayesian_rating_factor"), float(c))
-        expected = avg(c * [config.RATINGS.default] + [r1, r2])
-        s.failUnlessEqual(album("~#rating:bav"), expected)
+        expected = unweighted_average(c * [config.RATINGS.default] + [r1, r2])
+        s.failUnlessEqual(album("~#rating:unweighted_bav"), expected)
+
+        weights, nums = smoothed_length_weights_and_nums(
+            songs, "~#rating", total_length=5 + 17, smoothing_factor=10.0)
+        expected = weighted_bayesian_average(nums, weights)
+
         s.failUnlessEqual(album("~#rating"), expected)
 
     def test_bayesian_average(s):
-        bav = bayesian_average
+        bav = unweighted_bayesian_average
         l = [1, 2, 3, 4]
-        a = avg(l)
+        a = unweighted_average(l)
         # c=0 => this becomes a mean regardless of m
         s.failUnlessEqual(bav(l, 0, 0), a)
         s.failUnlessEqual(bav(l, 0, 999), a)
@@ -378,10 +404,16 @@ class TPlaylist(TestCase):
             s.failUnlessEqual(pl.get("~#length:sum"), 12)
             s.failUnlessEqual(pl.get("~#length:max"), 7)
             s.failUnlessEqual(pl.get("~#length:min"), 1)
-            s.failUnlessEqual(pl.get("~#length:avg"), 4)
+            s.failUnlessEqual(pl.get("~#length:unweighted_avg"), 4)
             s.failUnlessEqual(pl.get("~#length:foo"), 0)
 
-            s.failUnlessEqual(pl.get("~#rating:avg"), avg([0.1, 0.3, 0.5]))
+            s.failUnlessEqual(pl.get("~#rating:unweighted_avg"),
+                              unweighted_average([0.1, 0.3, 0.5]))
+
+            weights, nums = smoothed_length_weights_and_nums(
+                songs, "~#rating", total_length=12, smoothing_factor=10.0)
+            expected = weighted_average(nums, weights)
+            s.failUnlessEqual(pl.get("~#rating"), expected)
 
             s.failUnlessEqual(pl.get("~#filesize"), 303)
 
@@ -389,7 +421,6 @@ class TPlaylist(TestCase):
             s.failUnlessEqual(pl.get("~#lastplayed"), 88)
             s.failUnlessEqual(pl.get("~#bitrate"), 200)
             s.failUnlessEqual(pl.get("~#year"), 33)
-            s.failUnlessEqual(pl.get("~#rating"), 0.3)
             s.failUnlessEqual(pl.get("~#originalyear"), 2002)
 
     def test_updating_aggregates_extend(s):

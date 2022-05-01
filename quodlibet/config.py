@@ -200,6 +200,15 @@ INITIAL: Dict[str, Dict[str, str]] = {
         # (0 = disabled i.e. arithmetic mean)
         "bayesian_rating_factor": "0.0",
 
+        # This is used to decrease the high and increase the small weights, which are
+        # used in the calculation of numeric function averages (e.g. ~#rating:avg).
+        # This is done, so that longer tracks have a higher impact on the average than
+        # shorter ones. For example, when calculating the average rating of an album, we
+        # want this to be the case. However, without smoothing, short tracks had nearly
+        # no effect on the average, while long ones would dominate the average.
+        # If this is -1, averages are unweighted. If this is 0, no smoothing is applied.
+        "weight_smoothing_factor": "10",
+
         # rating symbol (black star)
         "rating_symbol_full": u'\u2605',
 

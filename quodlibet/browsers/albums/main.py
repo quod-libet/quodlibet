@@ -17,6 +17,7 @@ from typing import Optional
 
 import cairo
 from gi.repository import Gtk, Pango, Gdk, GLib, Gio
+from quodlibet.util.collection import NUM_FUNCS
 
 import quodlibet
 from quodlibet import _
@@ -69,7 +70,7 @@ class AlbumTagCompletion(EntryWordCompletion):
         for tag in ["tracks", "discs", "length", "date"]:
             self.__model.append(row=["#(" + tag])
         for tag in ["rating", "playcount", "skipcount"]:
-            for suffix in ["avg", "max", "min", "sum"]:
+            for suffix in NUM_FUNCS.keys():
                 self.__model.append(row=["#(%s:%s" % (tag, suffix)])
 
 
