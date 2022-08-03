@@ -63,6 +63,9 @@ class Application:
     is_restarting = False
     """True if the program should restart after quitting"""
 
+    undo_store = None
+    """The global UndoStore"""
+
     @property
     def icon_name(self):
         return self.id

@@ -1,6 +1,6 @@
 # Copyright 2004-2005 Joe Wreschnig, Michael Urman, Iñigo Serna
 #           2012,2013 Christoph Reiter
-#           2010-2021 Nick Boultbee
+#           2010-2022 Nick Boultbee
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -49,6 +49,9 @@ def main(argv=None):
     app.id = "io.github.quodlibet.QuodLibet"
     app.process_name = "quodlibet"
     quodlibet.set_application_info(app)
+
+    from quodlibet.qltk.undo import UndoStore
+    app.undo_store = UndoStore()
 
     library_path = os.path.join(quodlibet.get_user_dir(), "songs")
 

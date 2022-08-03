@@ -1,4 +1,4 @@
-# Copyright 2014-2021 Nick Boultbee
+# Copyright 2014-2022 Nick Boultbee
 #                2022 TheMelmacian
 #
 # This program is free software; you can redistribute it and/or modify
@@ -12,36 +12,10 @@ from quodlibet import _, print_w
 from quodlibet import formats
 from quodlibet.qltk import Icons
 from quodlibet.qltk.getstring import GetStringDialog
-from quodlibet.qltk.msg import ConfirmationPrompt
 from quodlibet.qltk.wlw import WaitLoadWindow
-from quodlibet.util import escape
 from quodlibet.util.path import uri_is_valid
 from urllib.response import addinfourl
 from senf import uri2fsn, fsn2text, path2fsn, bytes2fsn, text2fsn
-
-
-def confirm_remove_playlist_dialog_invoke(
-    parent, playlist, Confirmer=ConfirmationPrompt):
-    """Creates and invokes a confirmation dialog that asks the user whether or not
-       to go forth with the deletion of the selected playlist.
-
-       Confirmer needs to accept the arguments for constructing a dialog,
-       have a run-method returning a response, and have a RESPONSE_INVOKE
-       attribute.
-
-       returns the result of comparing the result of run to RESPONSE_INVOKE
-    """
-    title = (_("Are you sure you want to delete the playlist '%s'?")
-             % escape(playlist.name))
-    description = (_("All information about the selected playlist "
-                     "will be deleted and can not be restored."))
-    ok_text = _("_Delete")
-    ok_icon = Icons.EDIT_DELETE
-
-    dialog = Confirmer(parent, title, description, ok_text, ok_icon)
-    prompt = dialog.run()
-    response = (prompt == Confirmer.RESPONSE_INVOKE)
-    return response
 
 
 class GetPlaylistName(GetStringDialog):

@@ -7,8 +7,6 @@ import os
 import shutil
 from pathlib import Path
 
-from gi.repository import Gdk, Gtk
-
 import quodlibet.config
 from quodlibet import app
 from quodlibet import qltk
@@ -94,27 +92,27 @@ class TParsePLS(TestCase, ConfigSetupMixin, TParsePlaylistMixin):
 class TPlaylistIntegration(TestCase):
     DUPLICATES = 1
     SONG = AudioFile({
-                "title": "two",
-                "artist": "mu",
-                "~filename": dummy_path(u"/dev/zero")})
+        "title": "two",
+        "artist": "mu",
+        "~filename": dummy_path(u"/dev/zero")})
     SONGS = [
         AudioFile({
-                "title": "one",
-                "artist": "piman",
-                "~filename": dummy_path(u"/dev/null")}),
+            "title": "one",
+            "artist": "piman",
+            "~filename": dummy_path(u"/dev/null")}),
         SONG,
         AudioFile({
-                "title": "three",
-                "artist": "boris",
-                "~filename": dummy_path(u"/bin/ls")}),
+            "title": "three",
+            "artist": "boris",
+            "~filename": dummy_path(u"/bin/ls")}),
         AudioFile({
-                "title": "four",
-                "artist": "random",
-                "album": "don't stop",
-                "labelid": "65432-1",
-                "~filename": dummy_path(u"/dev/random")}),
+            "title": "four",
+            "artist": "random",
+            "album": "don't stop",
+            "labelid": "65432-1",
+            "~filename": dummy_path(u"/dev/random")}),
         SONG,
-        ]
+    ]
 
     def setUp(self):
         quodlibet.config.init()
@@ -210,18 +208,10 @@ class TPlaylistsBrowser(TestCase):
 
         PlaylistsBrowser.init(self.lib)
 
-        self.bar = PlaylistsBrowser(self.lib, self.MockConfirmerAccepting)
+        self.bar = PlaylistsBrowser(self.lib)
         self.bar.connect('songs-selected', self._expected)
         self.bar._select_playlist(self.bar.playlists()[0])
         self.expected = None
-
-        # Uses the declining confirmer.
-        self.bar_decline = PlaylistsBrowser(self.lib, self.MockConfirmerDeclining)
-        self.bar_decline.connect('songs-selected', self._expected_decline)
-        self.bar_decline._select_playlist(self.bar_decline.playlists()[0])
-        # Note that _do() uses self.expected, but _do() is not called by the
-        # testcase for declining the prompt. Tests fail with a shared expected.
-        self.expected_decline = None
 
     def tearDown(self):
         self.small.delete()
@@ -319,7 +309,7 @@ class TPlaylistsBrowser(TestCase):
         self.failUnless(ret, msg="Didn't simulate a delete keypress")
         self.failUnlessEqual(len(first_pl), original_length - 1)
 
-    def test_playlist_deletion_ACCEPT(self):
+    def test_playlist_deletion(self):
         b = self.bar
         orig_length = len(b.playlists())
         event = self.a_delete_event()
@@ -328,27 +318,22 @@ class TPlaylistsBrowser(TestCase):
         b._select_playlist(first_pl)
 
         ret = b._PlaylistsBrowser__key_pressed(b, event)
-        self.failUnless(ret, msg="Didn't simulate a delete keypress")
-        self.failUnlessEqual(len(b.playlists()), orig_length - 1)
-        self.failUnlessEqual(b.playlists()[0], second_pl)
+        assert ret, "Didn't simulate a delete keypress"
+        assert len(b.playlists()) == orig_length - 1
+        assert b.playlists()[0] == second_pl
 
-    def test_playlist_deletion_CANCEL(self):
-        b = self.bar_decline
-        orig_length = len(b.playlists())
-        event = self.a_delete_event()
-        first_pl = b.playlists()[0]
-        second_pl = b.playlists()[1]
-        b._select_playlist(first_pl)
+    def test_undo_delete(self):
+        orig_length = len(self.bar.playlists())
+        self.bar._PlaylistsBrowser__key_pressed(self.bar, self.a_delete_event())
+        assert len(self.bar.playlists()) == orig_length - 1, "delete didn't work"
 
-        ret = b._PlaylistsBrowser__key_pressed(b, event)
-        self.failUnless(ret, msg="Didn't simulate a delete keypress")
-        self.failUnlessEqual(len(b.playlists()), orig_length)
-        self.failUnlessEqual(b.playlists()[0], first_pl)
-        self.failUnlessEqual(b.playlists()[1], second_pl)
+        app.undo_store.undo()
+        assert len(self.bar.playlists()) == orig_length, "undo didn't work"
 
     def test_import(self):
         def fns(songs):
             return [song('~filename') for song in songs]
+
         pl_lib = self.bar.pl_lib
         assert len(self.bar.playlists()) == 2, "Should start with two playlists"
         assert len(pl_lib) == 2, f"Started with {pl_lib.keys()}"
@@ -375,6 +360,7 @@ class TPlaylistsBrowser(TestCase):
 
     @staticmethod
     def a_delete_event():
+        from gi.repository import Gdk, Gtk
         ev = Gdk.Event()
         ev.type = Gdk.EventType.KEY_PRESS
         ev.keyval, accel_mod = Gtk.accelerator_parse("Delete")
@@ -384,26 +370,6 @@ class TPlaylistsBrowser(TestCase):
     @staticmethod
     def _fake_browser_pack(b):
         app.window.get_child().pack_start(b, True, True, 0)
-
-    class MockConfirmerAccepting:
-
-        RESPONSE_INVOKE = Gtk.ResponseType.YES
-
-        def __init__(self, *args):
-            pass
-
-        def run(self, *args):
-            return self.RESPONSE_INVOKE
-
-    class MockConfirmerDeclining:
-
-        RESPONSE_INVOKE = Gtk.ResponseType.YES
-
-        def __init__(self, *args):
-            pass
-
-        def run(self, *args):
-            return Gtk.ResponseType.CANCEL
 
 
 class TPlaylistUtils(TestCase):
