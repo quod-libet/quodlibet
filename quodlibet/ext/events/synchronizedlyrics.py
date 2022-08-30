@@ -28,21 +28,23 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
     PLUGIN_ID = 'SynchronizedLyrics'
     PLUGIN_NAME = _('Synchronized Lyrics')
     PLUGIN_DESC = _('Shows synchronized lyrics from an .lrc file '
-                    'with same name as the track (or similar).')
+                    'with same name as the track (or similar), or '
+                    'embedded tags.')
     PLUGIN_ICON = Icons.FORMAT_JUSTIFY_FILL
 
     SYNC_PERIOD = 10000
 
     DEFAULT_BGCOLOR = '#343428282C2C'
-    DEFAULT_TXTCOLOR = '#FFFFFFFFFFFF'
+    DEFAULT_HLCOLOR = '#FFFFF000000'
+    DEFAULT_TXTCOLOR = '#FFFFFFFFFFF'
     DEFAULT_FONTSIZE = 25
 
     CFG_BGCOLOR_KEY = "backgroundColor"
+    CFG_HLCOLOR_KEY = "highlightColor"
     CFG_TXTCOLOR_KEY = "textColor"
     CFG_FONTSIZE_KEY = "fontSize"
 
-    # Note the trimming of whitespace, seems "most correct" behaviour
-    LINE_REGEX = re.compile(r"\s*\[([0-9]+:[0-9.]*)\]\s*(.+)\s*")
+    LINE_REGEX = re.compile(r"<[\d]{2}:[\d]{2}\.[\d]{2}>|\[[\d]{2}:[\d]{2}\.[\d]{2}\]")
 
     def __init__(self) -> None:
         super().__init__()
@@ -84,19 +86,29 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
         t.attach(b, 1, 2, 2, 3)
         b.connect('color-set', cls._set_background_color)
 
+        l = Gtk.Label(label=_("Highlight"))
+        l.set_alignment(xalign=1.0, yalign=0.5)
+        t.attach(l, 0, 1, 3, 4, xoptions=Gtk.AttachOptions.FILL)
+
+        c = Gdk.RGBA()
+        c.parse(cls._get_highlight_color())
+        b = Gtk.ColorButton(rgba=c)
+        t.attach(b, 1, 2, 3, 4)
+        b.connect('color-set', cls._set_highlight_color)
+
         font_section = Gtk.Label()
         font_section.set_markup("<b>" + _("Font") + "</b>")
-        t.attach(font_section, 0, 2, 3, 4)
+        t.attach(font_section, 0, 2, 4, 5)
 
         l = Gtk.Label(label=_("Size (px):"))
         l.set_alignment(xalign=1.0, yalign=0.5)
-        t.attach(l, 0, 1, 4, 5, xoptions=Gtk.AttachOptions.FILL)
+        t.attach(l, 0, 1, 5, 6, xoptions=Gtk.AttachOptions.FILL)
 
         a = Gtk.Adjustment.new(cls._get_font_size(), 10, 72, 2, 3, 0)
         s = Gtk.SpinButton(adjustment=a)
         s.set_numeric(True)
         s.set_text(str(cls._get_font_size()))
-        t.attach(s, 1, 2, 4, 5)
+        t.attach(s, 1, 2, 5, 6)
         s.connect('value-changed', cls._set_font_size)
 
         vb.pack_start(t, False, False, 0)
@@ -110,6 +122,10 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
         v = self.config_get(self.CFG_BGCOLOR_KEY, self.DEFAULT_BGCOLOR)
         return v[:3] + v[5:7] + v[9:11]
 
+    def _get_highlight_color(self):
+        v = self.config_get(self.CFG_HLCOLOR_KEY, self.DEFAULT_HLCOLOR)
+        return v[:3] + v[5:7] + v[9:11]
+
     def _get_font_size(self):
         return int(self.config_get(self.CFG_FONTSIZE_KEY,
                                    self.DEFAULT_FONTSIZE))
@@ -120,6 +136,10 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
 
     def _set_background_color(self, button):
         self.config_set(self.CFG_BGCOLOR_KEY, button.get_color().to_string())
+        self._style_lyrics_window()
+
+    def _set_highlight_color(self, button):
+        self.config_set(self.CFG_HLCOLOR_KEY, button.get_color().to_string())
         self._style_lyrics_window()
 
     def _set_font_size(self, button):
@@ -137,6 +157,8 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
         self.textview.set_cursor_visible(False)
         self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
         self.textview.set_justification(Gtk.Justification.CENTER)
+        self.textview.get_buffer().create_tag("highlight",\
+                foreground=self._get_background_color())
         self.scrolled_window.add_with_viewport(self.textview)
 
         vb = Gtk.HBox()
@@ -165,7 +187,7 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
             return
         self.scrolled_window.set_size_request(-1, 1.5 * self._get_font_size())
         qltk.add_css(self.textview, f"""
-            * {{
+          * {{
                 background-color: {self._get_background_color()};
                 color: {self._get_text_color()};
                 font-size: {self._get_font_size()}px;
@@ -185,7 +207,7 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
             # check in same location as track
             track_name = splitext(song("~basename") or "")[0]
             dir_ = song("~dirname")
-            print_d(f"Looking for .lrc files in {dir_}")
+            print_d(f"Looking for .lrc files in {dir_}, or lyrics tag")
             for filename in [f"{s}.lrc"
                              for s in {
                                  track_name,
@@ -196,28 +218,80 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
                                  song("~tracknumber~title")
                              }
                              ]:
-                print_d(f"Looking for {filename!r}")
-                try:
-                    with open(os.path.join(dir_, filename), 'r', encoding="utf-8") as f:
-                        print_d(f"Found lyrics file: {filename}")
-                        contents = f.read()
-                except FileNotFoundError:
-                    continue
-                return self._parse_lrc(contents)
+                print_d(f"Looking for tags")
+                contents = song("~lyrics")
+                if contents is None:
+                    try:
+                        print_d(f"Looking for {filename!r}")
+                        with open(os.path.join(dir_, filename), 'r', encoding="utf-8") as f:
+                            print_d(f"Found lyrics file: {filename}")
+                            contents = f.read()
+                    except FileNotFoundError:
+                        continue
+                else:
+                    print_d(f"Found lyrics in tag")
+                    return self._parse_lrc(contents)
             print_d(f"No lyrics found for {track_name!r}")
         return []
 
     def _parse_lrc(self, contents: str) -> List[Tuple[int, str]]:
         data = []
         for line in contents.splitlines():
-            match = self.LINE_REGEX.match(line)
-            if not match:
+            matches = self.LINE_REGEX.finditer(line)
+
+            groups = self._define_groups(matches, line)
+
+            if not groups:
                 continue
-            timing, text = match.groups()
-            minutes, seconds = (float(p) for p in timing.split(":", 1))
-            timestamp = int(1000 * (minutes * 60 + seconds))
-            data.append((timestamp, text))
+            text = ''
+            # rebuild text
+            for group in groups:
+                text += group[1]
+
+            index = 0
+            line_timing = self._get_timestamp(groups[0][0])
+            line_data = []
+            line_data.append(line_timing)
+            line_data.append(text)
+
+            for group in groups:
+                words = group[1]
+                timing = self._get_timestamp(group[0])
+                index = text.find(words) + len(words)
+                line_data.append(timing)
+                line_data.append(index)
+
+            data.append(tuple(line_data))
+
         return sorted(data)
+
+    def _get_timestamp(_self, timing):
+        minutes, seconds = (float(p) for p in timing.split(":", 1))
+        timestamp = int(1000 * (minutes * 60 + seconds))
+
+        return timestamp
+
+    def _define_groups(_self, matches, line):
+        found = []
+        last_match_end = None
+
+        for matchNum, match in enumerate(matches, start=1):
+            if len(found) > 0 and last_match_end is not None:
+                # add the text from the end of the last match
+                # to the start of the current match as the text of
+                # the last match (to previous list value)
+                found[-1].append(line[last_match_end:match.start()])
+
+            # take the timestamp (=match) from the current match
+            found.append([match.group().strip("<>[]")])
+            # save end of this match
+            last_match_end = match.end()
+
+        if len(found) > 0 and last_match_end is not None:
+            # add missing text of last match
+            found[-1].append(line[last_match_end:])
+
+        return found
 
     def _set_timers(self):
         if not self._timers:
@@ -228,10 +302,22 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
                 while (cur_idx < len(self._lines) and
                        self._lines[cur_idx][0] < cur_time + self.SYNC_PERIOD):
 
-                    timestamp = self._lines[cur_idx][0]
-                    line = self._lines[cur_idx][1]
-                    tid = GLib.timeout_add(timestamp - cur_time, self._show, line)
+                    cur_line = self._lines[cur_idx]
+                    timestamp = cur_line[0]
+                    line = cur_line[1]
+                    tid = GLib.timeout_add(timestamp - cur_time,\
+                            self._show, line)
                     self._timers.append((timestamp, tid))
+
+                    # if the length of the line is equal to the part that
+                    # should be first highlighted, then it won't be highlighted
+                    if cur_line[3] != len(cur_line[1]):
+                        iterator = zip(cur_line[2::2], cur_line[3::2])
+                        for timestamp, hl_idx in iterator:
+                            tid = GLib.timeout_add(timestamp - cur_time,\
+                                    self._set_highlight, hl_idx)
+                            self._timers.append((timestamp, tid))
+
                     cur_idx += 1
 
     def _sync(self):
@@ -248,7 +334,7 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
         return False
 
     def _clear_timers(self):
-        for ts, tid in self._timers[self._start_clearing_from:]:
+        for _ts, tid in self._timers:
             GLib.source_remove(tid)
         self._timers = []
         self._start_clearing_from = 0
@@ -256,9 +342,16 @@ class SynchronizedLyrics(EventPlugin, PluginConfigMixin):
     def _show(self, line) -> bool:
         if self.textview:
             self.textview.get_buffer().set_text(line)
+
         self._start_clearing_from += 1
         print_d(f"♪ {line.strip()} ♪")
         return False
+
+    def _set_highlight(self, offset):
+        buffer = self.textview.get_buffer()
+        start_hl = buffer.get_iter_at_offset(0)
+        end_hl = buffer.get_iter_at_offset(offset)
+        buffer.apply_tag_by_name("highlight", start_hl, end_hl)
 
     def plugin_on_song_started(self, song: AudioFile) -> None:
         if song:
