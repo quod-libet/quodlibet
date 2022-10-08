@@ -8,16 +8,23 @@
 
 import os
 
-from quodlibet import _, print_w
+from quodlibet import _, get_data_dir, print_w
 from quodlibet import formats
 from quodlibet.qltk import Icons
 from quodlibet.qltk.getstring import GetStringDialog
 from quodlibet.qltk.msg import ConfirmationPrompt
 from quodlibet.qltk.wlw import WaitLoadWindow
 from quodlibet.util import escape
-from quodlibet.util.path import uri_is_valid
+from quodlibet.util.path import mkdir, uri_is_valid
 from urllib.response import addinfourl
-from senf import uri2fsn, fsn2text, path2fsn, bytes2fsn, text2fsn
+from senf import fsnative, uri2fsn, fsn2text, path2fsn, bytes2fsn, text2fsn
+
+
+# Directory for playlist files
+PLAYLISTS = os.path.join(get_data_dir(), "playlists")
+assert isinstance(PLAYLISTS, fsnative)
+if not os.path.isdir(PLAYLISTS):
+    mkdir(PLAYLISTS)
 
 
 def confirm_remove_playlist_dialog_invoke(

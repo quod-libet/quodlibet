@@ -188,7 +188,7 @@ class CustomCommands(PlaylistPlugin, SongsMenuPlugin, PluginConfigMixin):
     ]
 
     COMS_FILE = os.path.join(
-        quodlibet.get_user_dir(), 'lists', 'customcommands.json')
+        quodlibet.get_data_dir(), 'lists', 'customcommands.json')
 
     _commands = None
     """Commands known to the class"""

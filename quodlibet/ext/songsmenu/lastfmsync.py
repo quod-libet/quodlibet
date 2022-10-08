@@ -233,7 +233,7 @@ class LastFMSync(SongsMenuPlugin):
                     "Last.fm profile.")
     PLUGIN_ICON = Icons.EMBLEM_SHARED
 
-    CACHE_PATH = os.path.join(quodlibet.get_user_dir(), "lastfmsync.db")
+    CACHE_PATH = os.path.join(quodlibet.get_cache_dir(), "lastfmsync.db")
 
     def runner(self, cache):
         changed = True

@@ -57,7 +57,7 @@ class WebsiteSearch(SongsMenuPlugin):
         ("Go to ~website", "<website>"),
     ]
     PATTERNS_FILE = os.path.join(
-        quodlibet.get_user_dir(), 'lists', 'searchsites')
+        quodlibet.get_data_dir(), 'lists', 'searchsites')
 
     _no_launch = False
 

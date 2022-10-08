@@ -16,7 +16,8 @@ from quodlibet.qltk import Icons
 from quodlibet.util.path import unexpand
 from quodlibet.plugins.events import EventPlugin
 from quodlibet import formats
-from quodlibet import app, get_user_dir, get_cache_dir
+from quodlibet import app, get_config_dir, get_data_dir, \
+        get_runtime_dir, get_cache_dir
 from quodlibet.util import fver, escape
 from quodlibet.qltk import gtk_version, pygobject_version, get_backend_name, \
     get_font_backend_name
@@ -28,7 +29,7 @@ class AppInformation(EventPlugin):
     PLUGIN_NAME = _("Application Information")
     PLUGIN_DESC = _("Various information about the application and its "
                     "environment.")
-    PLUGIN_CAN_ENABLE = False
+    PLUGIN_CAN_ENABLE = True
     PLUGIN_ICON = Icons.PREFERENCES_SYSTEM
 
     def PluginPreferences(self, *args):
@@ -68,7 +69,14 @@ class AppInformation(EventPlugin):
 
         grid.insert_row(row)
         l = label_title(_("Configuration Directory"))
-        v = label_path(get_user_dir())
+        v = label_path(get_config_dir())
+        grid.attach(l, 0, row, 1, 1)
+        grid.attach(v, 1, row, 1, 1)
+        row += 1
+
+        grid.insert_row(row)
+        l = label_title(_("Data Directory"))
+        v = label_path(get_data_dir())
         grid.attach(l, 0, row, 1, 1)
         grid.attach(v, 1, row, 1, 1)
         row += 1
@@ -76,6 +84,13 @@ class AppInformation(EventPlugin):
         grid.insert_row(row)
         l = label_title(_("Cache Directory"))
         v = label_path(get_cache_dir())
+        grid.attach(l, 0, row, 1, 1)
+        grid.attach(v, 1, row, 1, 1)
+        row += 1
+
+        grid.insert_row(row)
+        l = label_title(_("Runtime Directory"))
+        v = label_path(get_runtime_dir())
         grid.attach(l, 0, row, 1, 1)
         grid.attach(v, 1, row, 1, 1)
         row += 1

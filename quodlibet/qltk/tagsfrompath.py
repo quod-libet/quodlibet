@@ -34,7 +34,7 @@ from quodlibet.util import connect_obj
 from quodlibet.plugins.editing import TagsFromPathPlugin
 
 
-TBP = os.path.join(quodlibet.get_user_dir(), "lists", "tagpatterns")
+TBP = os.path.join(quodlibet.get_data_dir(), "lists", "tagpatterns")
 TBP_EXAMPLES = """\
 <tracknumber>. <title>
 <tracknumber> - <title>

@@ -281,7 +281,7 @@ class TopBar(Gtk.Toolbar):
         self._pattern_box = Gtk.VBox(spacing=3)
 
         # song text
-        info_pattern_path = os.path.join(quodlibet.get_user_dir(), "songinfo")
+        info_pattern_path = os.path.join(quodlibet.get_data_dir(), "songinfo")
         text = SongInfo(library.librarian, player, info_pattern_path)
         self._pattern_box.pack_start(text, True, True, 0)
         box.pack_start(self._pattern_box, True, True, 0)
@@ -579,7 +579,7 @@ class QuodLibetWindow(Window, PersistentWindowMixin, AppWindow):
         accel_group.connect(keyval, mod, 0, scroll_and_jump)
 
         # custom accel map
-        accel_fn = os.path.join(quodlibet.get_user_dir(), "accels")
+        accel_fn = os.path.join(quodlibet.get_config_dir(), "accels")
         Gtk.AccelMap.load(accel_fn)
         # save right away so we fill the file with example comments of all
         # accels

@@ -21,14 +21,16 @@ install_redirect_import_hook()
 from .util.i18n import _, C_, N_, ngettext, npgettext
 from .util.dprint import print_d, print_e, print_w
 from ._init import init_cli, init
-from ._main import get_base_dir, is_release, get_user_dir, app, \
+from ._main import get_base_dir, is_release, app, \
     set_application_info, init_plugins, enable_periodic_save, run, \
     finish_first_session, get_image_dir, is_first_session, \
-    get_build_description, get_build_version, get_cache_dir
+    get_build_description, get_build_version, \
+    get_config_dir, get_data_dir, get_cache_dir, get_runtime_dir
 
 
 _, C_, N_, ngettext, npgettext, is_release, init, init_cli, print_e, \
-    get_base_dir, print_w, print_d, get_user_dir, app, set_application_info, \
+    get_base_dir, print_w, print_d, app, set_application_info, \
     init_plugins, enable_periodic_save, run, finish_first_session, \
-    get_image_dir, is_first_session, get_build_description, \
-    get_build_version, get_cache_dir
+    get_image_dir, is_first_session, \
+    get_build_description, get_build_version, \
+    get_config_dir, get_data_dir, get_cache_dir, get_runtime_dir

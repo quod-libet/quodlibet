@@ -9,10 +9,13 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 
+import logging
+from pathlib import Path
 from typing import Dict
 import shutil
 
 from quodlibet.util import enum
+from ._main import get_config_dir, get_data_dir
 from . import const
 from quodlibet.util.config import Config, Error
 from quodlibet.util import print_d, print_w
@@ -63,6 +66,7 @@ INITIAL: Dict[str, Dict[str, str]] = {
         "watch": "false"
     },
 
+    # TODO: Move this to a separate file in `get_cache_dir`
     # State about the player, to restore on startup
     "memory": {
 
@@ -524,3 +528,33 @@ class DurationFormatPref:
 
 
 DURATION = DurationFormatPref()
+
+
+def migrate_legacy_data(move: bool):
+    cdir = Path(get_config_dir())
+    ddir = Path(get_data_dir())
+    folders = {
+        cdir / 'lists': ddir / 'lists',
+        cdir / 'playlists': ddir / 'playlists',
+    }
+    files = {
+        cdir / 'feeds': ddir / 'feeds',
+        cdir / 'stations': ddir / 'stations',
+    }
+    # Folders
+    # - Add to the files mapping
+    for fsrc, ftgt in folders.items():
+        if fsrc.is_dir():
+            if not ftgt.is_dir():
+                logging.critical('M Folder: %s', ftgt)  # TODO: `logging.info`
+                ftgt.mkdir()
+            for psrc in fsrc.iterdir():
+                assert psrc.is_file()
+                files[psrc] = ftgt / psrc.name
+    # Single files
+    for psrc, ptgt in files.items():
+        if psrc.exists() and not ptgt.exists():
+            logging.critical('M: %s » %s', psrc, ptgt)  # TODO: `logging.info`
+            shutil.copy(psrc, ptgt)
+            if move is True:
+                psrc.unlink()

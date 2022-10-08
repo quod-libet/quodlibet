@@ -22,6 +22,7 @@ from senf import (fsnative, bytes2fsn, fsn2bytes,
                   fsn2text, path2fsn, uri2fsn, _fsnative)
 
 from . import windows
+from . import print_w
 from .environment import is_windows
 from .misc import NamedTemporaryFile
 
@@ -268,6 +269,21 @@ def xdg_get_config_home():
         return os.path.abspath(data_home)
     else:
         return os.path.join(os.path.expanduser("~"), ".config")
+
+
+def xdg_get_runtime_dir():
+    if os.name == "nt":
+        from gi.repository import GLib
+        return GLib.get_user_runtime_dir()
+
+    data_home = os.getenv("XDG_RUNTIME_DIR")
+    if data_home:
+        return os.path.abspath(data_home)
+    else:
+        # > fall back to a replacement directory with similar capabilities and
+        # > print a warning message
+        print_w('Using the cache as runtime directory')
+        return xdg_get_cache_home()
 
 
 def parse_xdg_user_dirs(data):

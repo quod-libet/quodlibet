@@ -15,7 +15,7 @@ from gi.repository import Gtk
 from quodlibet import app
 from quodlibet import config
 from quodlibet import library
-from quodlibet import get_user_dir
+from quodlibet import get_cache_dir
 from quodlibet.formats import AudioFile
 from quodlibet.plugins import PM
 from quodlibet.qltk.ccb import ConfigCheckButton
@@ -97,7 +97,7 @@ class TSyncToDevice(PluginTestCase):
         with open(self.plugin.path_pattern, 'w') as f:
             f.write(self.RENAMEPATTERNS)
 
-        path_dest = Path(get_user_dir(), 'export')
+        path_dest = Path(get_cache_dir(), 'export')
         path_dest.mkdir(parents=True, exist_ok=True)
         self.path_dest = str(path_dest)
 

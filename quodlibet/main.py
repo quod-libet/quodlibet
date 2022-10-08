@@ -11,6 +11,7 @@ import sys
 import os
 
 from quodlibet import _
+from quodlibet import config
 from quodlibet.cli import process_arguments, exit_
 from quodlibet.util.dprint import print_d, print_, print_exc
 
@@ -21,7 +22,8 @@ def main(argv=None):
 
     import quodlibet
 
-    config_file = os.path.join(quodlibet.get_user_dir(), "config")
+    config.migrate_legacy_data(move=False)  # TODO: When tested, `move=True`?
+    config_file = os.path.join(quodlibet.get_config_dir(), "config")
     quodlibet.init_cli(config_file=config_file)
 
     try:
@@ -40,7 +42,6 @@ def main(argv=None):
 
     import quodlibet.player
     import quodlibet.library
-    from quodlibet import config
     from quodlibet import browsers
     from quodlibet import util
 
@@ -50,7 +51,7 @@ def main(argv=None):
     app.process_name = "quodlibet"
     quodlibet.set_application_info(app)
 
-    library_path = os.path.join(quodlibet.get_user_dir(), "songs")
+    library_path = os.path.join(quodlibet.get_data_dir(), "songs")
 
     print_d("Initializing main library (%s)" % (
             quodlibet.util.path.unexpand(library_path)))
@@ -158,7 +159,7 @@ def main(argv=None):
     mmkeys_handler = MMKeysHandler(app)
     mmkeys_handler.start()
 
-    current_path = os.path.join(quodlibet.get_user_dir(), "current")
+    current_path = os.path.join(quodlibet.get_runtime_dir(), "current")
     fsiface = FSInterface(current_path, player, library)
     remote = Remote(app, cmd_registry)
     try:

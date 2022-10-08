@@ -16,7 +16,9 @@ from quodlibet import const
 from quodlibet import build
 from quodlibet.util import cached_func, windows, set_process_title, is_osx
 from quodlibet.util.dprint import print_d
-from quodlibet.util.path import mkdir, xdg_get_config_home, xdg_get_cache_home
+from quodlibet.util.path import mkdir, \
+        xdg_get_config_home, xdg_get_data_home, \
+        xdg_get_cache_home, xdg_get_runtime_dir
 
 
 PLUGIN_DIRS = ["editing", "events", "playorder", "songsmenu", "playlist",
@@ -131,12 +133,30 @@ def get_image_dir():
 
 
 @cached_func
-def get_cache_dir():
-    """The directory to store things into which can be deleted at any time"""
+def get_data_dir():
+    """The directory to store things considered user-specific data files"""
 
-    if os.name == "nt" and build.BUILD_TYPE == u"windows-portable":
-        # avoid writing things to the host system for the portable build
-        path = os.path.join(get_user_dir(), "cache")
+    fallback_dir, legacy = get_fallback_dir()
+    if legacy:
+        path = fallback_dir
+    elif fallback_dir:
+        path = os.path.join(fallback_dir, "data")
+    else:
+        path = os.path.join(xdg_get_data_home(), "quodlibet")
+
+    mkdir(path, 0o700)
+    return path
+
+
+@cached_func
+def get_cache_dir():
+    """The directory to store things which can be deleted at any time"""
+
+    fallback_dir, legacy = get_fallback_dir()
+    if legacy:
+        path = fallback_dir
+    elif fallback_dir:
+        path = os.path.join(fallback_dir, "cache")
     else:
         path = os.path.join(xdg_get_cache_home(), "quodlibet")
 
@@ -145,33 +165,64 @@ def get_cache_dir():
 
 
 @cached_func
-def get_user_dir():
-    """Place where QL saves its state, database, config etc."""
+def get_runtime_dir():
+    """The directory to store user-specific runtime files and other file
+    objects"""
+
+    fallback_dir, legacy = get_fallback_dir()
+    if legacy:
+        path = fallback_dir
+    elif fallback_dir:
+        path = os.path.join(fallback_dir, "runtime")
+    else:
+        path = os.path.join(xdg_get_runtime_dir(), "quodlibet")
+
+    mkdir(path, 0o700)
+    return path
+
+
+@cached_func
+def get_config_dir():
+    """The directory to store user-specific configuration files"""
+
+    fallback_dir, legacy = get_fallback_dir()
+    if legacy:
+        path = fallback_dir
+    elif fallback_dir:
+        # TODO: Maybe without the config?
+        path = os.path.join(fallback_dir, "config")
+    else:
+        path = os.path.join(xdg_get_config_home(), "quodlibet")
+
+    mkdir(path, 0o750)
+    return path
+
+
+@cached_func
+def get_fallback_dir():
+    """The fallback for non-Linux and ~/.quodlibet"""
+    USERDIR, legacy = None, False
 
     if os.name == "nt":
         USERDIR = os.path.join(windows.get_appdata_dir(), "Quod Libet")
     elif is_osx():
         USERDIR = os.path.join(os.path.expanduser("~"), ".quodlibet")
-    else:
-        USERDIR = os.path.join(xdg_get_config_home(), "quodlibet")
+    else:  # Linux
+        homedir = os.path.join(os.path.expanduser("~"), ".quodlibet")
+        if os.path.exists(homedir):
+            # This is a legacy path
+            USERDIR, legacy = homedir, True
 
-        if not os.path.exists(USERDIR):
-            tmp = os.path.join(os.path.expanduser("~"), ".quodlibet")
-            if os.path.exists(tmp):
-                USERDIR = tmp
-
+    # Bruteforce override
     if 'QUODLIBET_USERDIR' in os.environ:
         USERDIR = os.environ['QUODLIBET_USERDIR']
 
     if build.BUILD_TYPE == u"windows-portable":
+        # avoid writing things to the host system for the portable build
         USERDIR = os.path.normpath(os.path.join(
             os.path.dirname(path2fsn(sys.executable)), "..", "..", "config"))
 
-    # XXX: users shouldn't assume the dir is there, but we currently do in
-    # some places
-    mkdir(USERDIR, 0o750)
-
-    return USERDIR
+    return USERDIR, legacy
 
 
 def is_release():
@@ -219,7 +270,7 @@ def init_plugins(no_plugins=False):
     from quodlibet import plugins
     folders = [os.path.join(get_base_dir(), "ext", kind)
                for kind in PLUGIN_DIRS]
-    folders.append(os.path.join(get_user_dir(), "plugins"))
+    folders.append(os.path.join(get_config_dir(), "plugins"))
     print_d("Scanning folders: %s" % folders)
     pm = plugins.init(folders, no_plugins)
     pm.rescan()
@@ -369,7 +420,7 @@ def run(window, before_quit=None):
     # gtk+ on osx is just too crashy
     if not is_osx():
         try:
-            faulthandling.enable(os.path.join(get_user_dir(), "faultdump"))
+            faulthandling.enable(os.path.join(get_cache_dir(), "faultdump"))
         except IOError:
             util.print_exc()
         else:

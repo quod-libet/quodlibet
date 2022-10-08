@@ -18,7 +18,7 @@ from senf import fsn2text
 from quodlibet import _
 from quodlibet import app
 from quodlibet import config
-from quodlibet import get_user_dir
+from quodlibet import get_data_dir
 from quodlibet import ngettext
 from quodlibet import qltk
 from quodlibet import util
@@ -93,8 +93,8 @@ class SyncToDevice(EventPlugin, PluginConfigMixin):
     CONFIG_PATH_KEY = '{}_{}'.format(PLUGIN_CONFIG_SECTION, 'path')
     CONFIG_PATTERN_KEY = '{}_{}'.format(PLUGIN_CONFIG_SECTION, 'pattern')
 
-    path_query = os.path.join(get_user_dir(), 'lists', 'queries.saved')
-    path_pattern = os.path.join(get_user_dir(), 'lists', 'renamepatterns')
+    path_query = os.path.join(get_data_dir(), 'lists', 'queries.saved')
+    path_pattern = os.path.join(get_data_dir(), 'lists', 'renamepatterns')
 
     spacing_main = 20
     spacing_large = 6

@@ -166,7 +166,8 @@ def _get_cover_size():
 class CoverGrid(Browser, util.InstanceTracker, DisplayPatternMixin):
     __model = None
 
-    _PATTERN_FN = os.path.join(quodlibet.get_user_dir(), "album_pattern")
+    # TODO: Maybe on the Config folder?
+    _PATTERN_FN = os.path.join(quodlibet.get_data_dir(), "album_pattern")
     _DEFAULT_PATTERN_TEXT = DEFAULT_PATTERN_TEXT
 
     name = _("Cover Grid")

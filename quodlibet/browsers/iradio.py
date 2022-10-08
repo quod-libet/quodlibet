@@ -50,8 +50,8 @@ from quodlibet.qltk.x import MenuItem, Align, ScrolledWindow, Button
 
 STATION_LIST_URL = \
     "https://quodlibet.github.io/radio/radiolist.bz2"
-STATIONS_FAV = os.path.join(quodlibet.get_user_dir(), "stations")
-STATIONS_ALL = os.path.join(quodlibet.get_user_dir(), "stations_all")
+STATIONS_FAV = os.path.join(quodlibet.get_data_dir(), "stations")
+STATIONS_ALL = os.path.join(quodlibet.get_cache_dir(), "stations_all")
 
 # TODO: - Ranking: reduce duplicate stations (max 3 URLs per station)
 #                  prefer stations that match a genre?

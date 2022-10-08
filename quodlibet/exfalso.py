@@ -24,7 +24,7 @@ def main(argv=None):
 
     import quodlibet
 
-    config_file = os.path.join(quodlibet.get_user_dir(), "config")
+    config_file = os.path.join(quodlibet.get_config_dir(), "config")
     quodlibet.init(config_file=config_file)
 
     from quodlibet.qltk import add_signal_watch

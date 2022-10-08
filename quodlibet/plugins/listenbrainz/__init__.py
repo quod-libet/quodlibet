@@ -87,7 +87,7 @@ class ListenBrainzSubmitQueue():
     plugin being enabled; other plugins may use submit() to queue songs for
     submission.
     """
-    DUMP = os.path.join(quodlibet.get_user_dir(), "listenbrainz_cache")
+    DUMP = os.path.join(quodlibet.get_cache_dir(), "listenbrainz_cache")
 
     # These objects are shared across instances, to allow other plugins to
     # queue listens in future versions of QL.

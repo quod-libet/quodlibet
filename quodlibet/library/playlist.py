@@ -15,7 +15,7 @@ from quodlibet.util.collection import (Playlist, XSPFBackedPlaylist,
                                        FileBackedPlaylist)
 from senf import text2fsn, _fsnative, fsn2text
 
-_DEFAULT_PLAYLIST_DIR = text2fsn(os.path.join(quodlibet.get_user_dir(), "playlists"))
+_DEFAULT_PLAYLIST_DIR = text2fsn(os.path.join(quodlibet.get_data_dir(), "playlists"))
 """Directory for playlist files"""
 
 HIDDEN_RE = re.compile(r'^\.\w[^.]*')

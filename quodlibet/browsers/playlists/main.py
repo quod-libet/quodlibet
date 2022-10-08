@@ -51,7 +51,8 @@ class PlaylistsBrowser(Browser, DisplayPatternMixin):
     priority = 2
     replaygain_profiles = ["track"]
     __last_render = None
-    _PATTERN_FN = os.path.join(quodlibet.get_user_dir(), "playlist_pattern")
+    # TODO: Maybe on the Config folder?
+    _PATTERN_FN = os.path.join(quodlibet.get_data_dir(), "playlist_pattern")
     _DEFAULT_PATTERN_TEXT = DEFAULT_PATTERN_TEXT
 
     def __init__(self, songs_lib: SongFileLibrary, Confirmer=ConfirmationPrompt):

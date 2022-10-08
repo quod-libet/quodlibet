@@ -12,7 +12,7 @@ from typing import Type
 from senf import path2fsn, fsn2bytes, bytes2fsn, fsnative
 
 from quodlibet.util import fifo, print_w
-from quodlibet import get_user_dir
+from quodlibet import get_runtime_dir
 try:
     from quodlibet.util import winpipe
 except ImportError:
@@ -114,7 +114,7 @@ class QuodLibetWinRemote(RemoteBase):
 class QuodLibetUnixRemote(RemoteBase):
 
     _FIFO_NAME = "control"
-    _PATH = os.path.join(get_user_dir(), _FIFO_NAME)
+    _PATH = os.path.join(get_runtime_dir(), _FIFO_NAME)
 
     def __init__(self, app, cmd_registry):
         self._app = app

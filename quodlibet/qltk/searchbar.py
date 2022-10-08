@@ -50,7 +50,7 @@ class SearchBarBox(Gtk.Box):
 
         if filename is None:
             filename = os.path.join(
-                quodlibet.get_user_dir(), "lists", "queries")
+                quodlibet.get_data_dir(), "lists", "queries")
 
         historic_entries_count = config.getint("browsers", "searchbar_historic_entries")
 
@@ -281,7 +281,7 @@ class MultiSearchBarBox(LimitSearchBarBox):
         super().__init__(*args, **kwargs)
 
         self.multi_filename = os.path.join(
-            quodlibet.get_user_dir(), "lists", "multiqueries"
+            quodlibet.get_data_dir(), "lists", "multiqueries"
         ) if multi_filename is None else multi_filename
 
         self._old_placeholder = self._entry.get_placeholder_text()

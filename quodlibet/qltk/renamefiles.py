@@ -36,7 +36,7 @@ from quodlibet.util import connect_obj
 from quodlibet.util.path import strip_win32_incompat_from_path
 from quodlibet.util.dprint import print_d, print_e
 
-NBP = os.path.join(quodlibet.get_user_dir(), "lists", "renamepatterns")
+NBP = os.path.join(quodlibet.get_data_dir(), "lists", "renamepatterns")
 NBP_EXAMPLES = """\
 <tracknumber>. <title>
 <tracknumber|<tracknumber>. ><title>
