@@ -143,12 +143,14 @@ function install_quodlibet {
 
     build_python "${REPO_CLONE}"/setup.py install
 
+    QL_VERSION="4.6.0"
+
     # Create launchers
     python "${MISC}"/create-launcher.py \
         "${QL_VERSION}" "${MINGW_ROOT}"/bin
 
-    QL_VERSION=$(MSYSTEM="" build_python -c \
-        "import quodlibet.const; import sys; sys.stdout.write(quodlibet.const.VERSION)")
+    #QL_VERSION=$(MSYSTEM="" build_python -c \
+    #    "import quodlibet.const; import sys; sys.stdout.write(quodlibet.const.VERSION)")
     QL_VERSION_DESC="$QL_VERSION"
     if [ "$1" = "main" ]
     then
