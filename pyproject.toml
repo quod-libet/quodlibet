@@ -33,10 +33,11 @@ dbus-python = { version = "*", platform = "linux", optional = true }
 soco = { version = ">=0.27, <0.28", optional = true }
 pypresence = { version = "^4.2.1", optional = true }
 paho-mqtt = { version = "^1.6.1", optional = true }
+beets = { extras = ["lyrics"], version = "^2.1.0", optional = true }
 
 [tool.poetry.extras]
 # Use with poetry install -E plugins
-plugins = ["musicbrainzngs", "dbus-python", "paho-mqtt", "soco", "pypresence"]
+plugins = ["musicbrainzngs", "dbus-python", "paho-mqtt", "soco", "pypresence", "beets"]
 
 [tool.poetry.dev-dependencies]
 pytest = '^7.2.2'
