@@ -1187,7 +1187,7 @@ class SongList(AllTreeView, SongListDnDMixin, DragScroll, util.InstanceTracker):
             conductor lyricist originalartist""".split()
         albuminfo = """album ~album~discsubtitle labelid ~#disc ~#discs
             ~#tracks albumartist""".split()
-        dateinfo = """date originaldate recordingdate ~year ~originalyear
+        dateinfo = """date originaldate recordingdate releasedate ~year ~originalyear
             ~#laststarted ~#lastplayed ~#added ~#mtime""".split()
         fileinfo = """~format ~#bitdepth ~#bitrate ~#filesize
             ~filename ~basename ~dirname ~uri ~codec ~encoding ~#channels

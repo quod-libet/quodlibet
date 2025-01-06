@@ -119,6 +119,7 @@ _TAGS = {t.name: t for t in [
     T("originalalbum", "u", _("original album")),
     T("originalartist", "us", _("original artist")),
     T("recordingdate", "u", _("recording date")),
+    T("releasedate", "u", _("release date")),
     T("releasecountry", "u", _("release country")),
     T("initialkey", "u", _("initial key")),
 

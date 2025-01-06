@@ -155,7 +155,7 @@ class LibraryValueCompletion(Gtk.EntryCompletion):
             return
         elif tag is None:
             return
-        elif tag in ("bpm date discnumber isrc originaldate recordingdate "
+        elif tag in ("bpm date discnumber isrc originaldate recordingdate releasedate"
                      "tracknumber title").split() + MACHINE_TAGS:
             return
         elif tag in formats.PEOPLE:

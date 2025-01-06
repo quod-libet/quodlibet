@@ -453,6 +453,11 @@ class AudioFile(dict, ImageContainer, HasKey):
                     return int(util.parse_year(self.get("originaldate", default)))
                 except (ValueError, TypeError, KeyError):
                     return default
+            elif key == "#releasedate":
+                releasedate = self.get("releasedate")
+                if releasedate is None:
+                    return default
+                return util.date_key(releasedate)
             elif key == "#tracks":
                 try:
                     return int(self["tracknumber"].split("/")[1])
