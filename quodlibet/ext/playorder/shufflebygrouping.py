@@ -12,6 +12,7 @@ from gi.repository import Gtk, GLib
 
 from quodlibet import _
 from quodlibet import app
+from quodlibet.commands import registry as cmd_registry
 from quodlibet.order import OrderInOrder
 from quodlibet.order import OrderRemembered
 from quodlibet.order.reorder import Reorder
@@ -20,6 +21,7 @@ from quodlibet.plugins.playorder import ShufflePlugin
 from quodlibet.qltk import Icons
 from quodlibet.qltk.notif import Task
 
+from itertools import groupby
 
 pconfig = PluginConfig("shufflebygrouping")
 pconfig.defaults.set("grouping", "~grouping~album~albumartist")
@@ -40,51 +42,66 @@ class ShuffleByGrouping(ShufflePlugin, OrderRemembered):
     accelerated_name = _("Shuffle by _grouping")
     priority = Reorder.priority
 
-    def next(self, playlist, current_song):
-        return self._next(playlist, current_song)
+    def __init__(self):
+        super().__init__()
+        self._order = None
+        self._register_commands()
 
-    def _next(self, playlist, current_song, delay_on=True):
-        grouping = str(pconfig.gettext("grouping")).strip()
-        grouping_filter = str(pconfig.gettext("grouping_filter")).strip()
+    def next(self, playlist, iter):
+        return self._next(playlist, iter)
+
+    def next_explicit(self, playlist, iter):
+        return self._next(playlist, iter, delay_on=False)
+
+    def previous(self, playlist, iter):
+        return OrderRemembered.previous(self, playlist, iter)
+
+    def reset(self, playlist):
+        super().reset(playlist)
+        self._order = None
+
+    def _next(self, playlist, current_iter, delay_on=True):
         delay = pconfig.getint("delay")
 
-        def same_group(song_iter_a, song_iter_b):
-            if song_iter_a is None or song_iter_b is None:
-                return False
-            song_a = playlist.get_value(song_iter_a)
-            song_b = playlist.get_value(song_iter_b)
-            if not self._tag_defined(grouping_filter, song_a):
-                return False
-            if not self._tag_defined(grouping_filter, song_b):
-                return False
-            return song_a(grouping) == song_b(grouping)
-
         # Keep track of played songs
-        OrderRemembered.next(self, playlist, current_song)
-        remaining = OrderRemembered.remaining(self, playlist)
+        OrderRemembered.next(self, playlist, current_iter)
 
-        # Check if playlist is finished or empty
-        if not remaining:
-            OrderRemembered.reset(self, playlist)
-            return None
+        current_song = playlist.get_value(current_iter) if current_iter else None
 
-        # Play next song in current grouping
-        next_song = OrderInOrder.next(self, playlist, current_song)
-        if same_group(next_song, current_song):
-            return next_song
+        song_grouping = self._grouping_function(playlist)
 
-        # Pause for a moment before picking new group
-        if delay_on:
+        if not self._order or not self._order.get(current_song):
+            iters = (row.iter for row in playlist)
+            groups = [list(group) for _, group in groupby(iters, song_grouping)]
+
+            random.shuffle(groups)
+
+            # rotate to put group containing current song to first position
+            if current_iter:
+                group_i = None
+
+                for i, group in enumerate(groups):
+                    if any(playlist.get_value(iter) == current_song for iter in group):
+                        group_i = i
+                        break
+
+                if group_i is not None:
+                    groups = groups[group_i:] + groups[:group_i]
+
+            shuffled = [iter for group in groups for iter in group]
+            self._order = dict(
+                zip(
+                    [None] + [playlist.get_value(iter) for iter in shuffled],
+                    shuffled + [None]
+                )
+            )
+
+        next_iter = self._order.get(current_song)
+
+        if delay_on and current_iter and next_iter and song_grouping(current_iter) != song_grouping(next_iter):
             self._resume_after_delay(delay)
 
-        # Pick random song at the start of a new group
-        while True:
-            song_location = random.choice(list(remaining.keys()))
-            new_song = playlist.get_iter(song_location)
-            new_song_prev = (playlist.get_iter(song_location - 1)
-                             if song_location >= 1 else None)
-            if not same_group(new_song, new_song_prev):
-                return new_song
+        return next_iter
 
     @staticmethod
     def _resume_after_delay(delay, refresh_rate=20):
@@ -105,17 +122,77 @@ class ShuffleByGrouping(ShufflePlugin, OrderRemembered):
         GLib.timeout_add(1000 / refresh_rate, next, countdown())
 
     @staticmethod
-    def _tag_defined(tag_name, song):
-        if not tag_name:
-            return True
-        tag_value = song(tag_name)
-        return bool(tag_value.strip())
+    def _grouping_function(playlist):
+        grouping = str(pconfig.gettext("grouping")).strip()
+        grouping_filter = str(pconfig.gettext("grouping_filter")).strip()
 
-    def next_explicit(self, playlist, current_song):
-        return self._next(playlist, current_song, delay_on=False)
+        def f(iter):
+            song = playlist.get_value(iter)
+            if not grouping_filter or bool(song(grouping_filter).strip()):
+                return song(grouping)
+            else:
+                return song
 
-    def previous(self, playlist, current_song):
-        return OrderRemembered.previous(self, playlist, current_song)
+        return f
+
+    def _register_commands(self):
+        @cmd_registry.register("next-album")
+        def _next_album(app):
+            playlist = app.window.playlist.pl
+
+            song_grouping = self._grouping_function(playlist)
+
+            def playlist_index(iter):
+                return playlist.get_path(iter).get_indices()[0]
+
+            iter = playlist.current_iter
+            if iter:
+                grouping = song_grouping(iter)
+                i = playlist_index(iter)
+                while True:
+                    playlist.next()
+                    iter = playlist.current_iter
+                    if song_grouping(iter) != grouping or playlist_index(iter) <= i:
+                        break
+                app.player.go_to(iter)
+                app.player.play()
+            else:
+                app.player.next()
+
+        @cmd_registry.register("previous-album")
+        def _previous_album(app):
+            playlist = app.window.playlist.pl
+
+            if not playlist.current_iter:
+                return
+
+            song_grouping = self._grouping_function(playlist)
+
+            def playlist_index(iter):
+                return playlist.get_path(iter).get_indices()[0]
+
+            playlist.previous()
+            playlist.previous() # first is not changing current_iter, why?
+            iter = playlist.current_iter
+
+            if not iter:
+                app.player.previous()
+                return
+
+            grouping = song_grouping(iter)
+            i = playlist_index(iter)
+            while True:
+                playlist.previous()
+                previous = playlist.current_iter
+                if previous is None or song_grouping(previous) != grouping or playlist_index(previous) >= i:
+                    break
+                iter = previous
+
+            if playlist.current_iter:
+                playlist.next()
+
+            app.player.go_to(iter)
+            app.player.play()
 
     @classmethod
     def PluginPreferences(cls, window):
