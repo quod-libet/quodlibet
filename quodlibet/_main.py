@@ -323,6 +323,9 @@ def run(window, before_quit=None):
 
     def quit_gtk(window):
 
+        # set the flag if the window was not closed via app.quit()
+        app.is_quitting = True
+
         if before_quit is not None:
             before_quit()
 

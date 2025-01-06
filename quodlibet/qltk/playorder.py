@@ -9,6 +9,7 @@
 from gi.repository import Gtk, GObject
 
 from quodlibet import _
+from quodlibet import app
 from quodlibet import config
 from quodlibet import qltk
 from quodlibet.order import Order, OrderInOrder
@@ -317,32 +318,34 @@ class PlayOrderWidget(Gtk.HBox):
         self.__repeat_widget.enabled = bool(enabled)
 
     def __repeat_updated(self, widget, repeat_cls):
-        if self.__inhibit:
+        if self.__inhibit or app.is_quitting:
             return
         print_d("New repeat mode: %s" % repeat_cls.name)
         config.set("memory", "repeat_mode", repeat_cls.name)
         self.__compose_order()
 
     def __shuffle_updated(self, widget, shuffle_cls):
-        if self.__inhibit:
+        if self.__inhibit or app.is_quitting:
             return
         print_d("New shuffle mode: %s" % shuffle_cls.name)
         config.set("memory", "shuffle_mode", shuffle_cls.name)
         self.__compose_order()
 
     def __shuffle_toggled(self, widget):
-        if self.__inhibit:
+        if self.__inhibit or app.is_quitting:
             return
         config.set("memory", "shuffle", widget.enabled)
         self.__compose_order()
 
     def __repeat_toggled(self, widget):
-        if self.__inhibit:
+        if self.__inhibit or app.is_quitting:
             return
         config.set("memory", "repeat", widget.enabled)
         self.__compose_order()
 
     def __compose_order(self):
+        if app.is_quitting:
+            return
         old_order = self.order
         repeat_cls = self.__get_repeat_class()
         shuffle_cls = self.__get_shuffle_class()
