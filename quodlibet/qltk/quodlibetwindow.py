@@ -287,21 +287,24 @@ class TopBar(Gtk.Toolbar):
         box.pack_start(self._pattern_box, True, True, 0)
 
         # cover image
-        self.image = CoverImage(resize=True)
-        connect_destroy(player, "song-started", self.__new_song)
+        if config.getboolean("settings", "disable_cover"):
+            self.image = None
+        else:
+            self.image = CoverImage(resize=True)
+            connect_destroy(player, "song-started", self.__new_song)
 
-        # FIXME: makes testing easier
-        if app.cover_manager:
-            connect_destroy(
-                app.cover_manager, "cover-changed",
-                self.__song_art_changed, library)
+            # FIXME: makes testing easier
+            if app.cover_manager:
+                connect_destroy(
+                    app.cover_manager, "cover-changed",
+                    self.__song_art_changed, library)
 
-        box.pack_start(Align(self.image, top=3, right=3), False, True, 0)
+            box.pack_start(Align(self.image, top=3, right=3), False, True, 0)
 
-        # On older Gtk+ (3.4, at least)
-        # setting a margin on CoverImage leads to errors and result in the
-        # QL window not being visible for some reason.
-        assert self.image.props.margin == 0
+            # On older Gtk+ (3.4, at least)
+            # setting a margin on CoverImage leads to errors and result in the
+            # QL window not being visible for some reason.
+            assert self.image.props.margin == 0
 
         for child in self.get_children():
             child.show_all()
@@ -321,10 +324,10 @@ class TopBar(Gtk.Toolbar):
         config.set("memory", "volume", str(player.volume))
 
     def __new_song(self, player, song):
-        self.image.set_song(song)
+        if self.image: self.image.set_song(song)
 
     def __song_art_changed(self, player, songs, library):
-        self.image.refresh()
+        if self.image: self.image.refresh()
 
 
 class QueueButton(HighlightToggleButton):

@@ -147,6 +147,10 @@ class AdvancedPreferencesPane(Gtk.VBox):
                 "Album cover size",
                 ("Size of the album cover images in the album list browser "
                  "(restart required)")),
+            boolean_config(
+                "settings", "disable_cover",
+                "Disable cover in the main player controls",
+                "(restart required)"),
             text_config(
                 "albumart", "search_filenames",
                 "Album art search filenames",

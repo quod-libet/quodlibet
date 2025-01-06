@@ -231,6 +231,9 @@ INITIAL: dict[str, dict[str, str]] = {
         # support sending them to the trash.
         "bypass_trash": "false",
 
+        # hide cover art from the main player window (next to seekbar)
+        "disable_cover": "false",
+
         # osx implementation might be buggy so let users disable it
         "disable_mmkeys": "false",
 
