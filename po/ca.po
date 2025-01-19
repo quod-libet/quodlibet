@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-18 15:42+0000\n"
+"PO-Revision-Date: 2025-01-18 21:47+0000\n"
 "Last-Translator: Marc Riera <marcriera@softcatala.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/ca/>\n"
@@ -694,7 +694,7 @@ msgstr "_Crea una llista de reproducció…"
 #, python-format
 msgid "What do you want to do with that %d song?"
 msgid_plural "What do you want to do with those %d songs?"
-msgstr[0] "Què voleu fer amb aquesta cançó de %d?"
+msgstr[0] "Què voleu fer amb %d cançó?"
 msgstr[1] "Què voleu fer amb aquestes %d cançons?"
 
 #: quodlibet/browsers/playlists/menu.py:80
