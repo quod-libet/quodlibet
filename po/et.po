@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-17 10:35+0000\n"
+"PO-Revision-Date: 2025-01-19 17:45+0000\n"
 "Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/et/>\n"
@@ -1557,47 +1557,47 @@ msgstr ""
 #: quodlibet/ext/events/bansheeimport.py:110
 #: quodlibet/ext/events/rbimport.py:114
 msgid "Import Failed"
-msgstr ""
+msgstr "Importimine ei õnnestunud"
 
 #: quodlibet/ext/events/bansheeimport.py:117
 #, python-format
 msgid "Successfully imported ratings and statistics for %d song"
 msgid_plural "Successfully imported ratings and statistics for %d songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d loo hinnangute ja statistika importimine õnnestus"
+msgstr[1] "%d loo hinnangute ja statistika importimine õnnestus"
 
 #: quodlibet/ext/events/bansheeimport.py:128
 msgid "Banshee Import"
-msgstr ""
+msgstr "Import Bansheest"
 
 #: quodlibet/ext/events/bansheeimport.py:129
 msgid "Imports ratings and song statistics from Banshee."
-msgstr ""
+msgstr "Impordi hinnangud ja statistika Bansheest."
 
 #: quodlibet/ext/events/bansheeimport.py:138
 msgid "_Database path:"
-msgstr ""
+msgstr "An_dmebaasi asukoht:"
 
 #: quodlibet/ext/events/bansheeimport.py:167
 #: quodlibet/ext/events/rbimport.py:131
 msgid "Start Import"
-msgstr ""
+msgstr "Alusta importimist"
 
 #: quodlibet/ext/events/clock.py:24
 msgid "Alarm Clock"
-msgstr ""
+msgstr "Äratuskell"
 
 #: quodlibet/ext/events/clock.py:25
 msgid "Wakes you up with loud music."
-msgstr ""
+msgstr "Äratab sind üles valju muusikaga."
 
 #: quodlibet/ext/events/clock.py:118
 msgid "Lullaby"
-msgstr ""
+msgstr "Hällilaul"
 
 #: quodlibet/ext/events/clock.py:119
 msgid "Fades out and pauses your music."
-msgstr ""
+msgstr "Aegamisi summutab muusika ja peatab esituse."
 
 #: quodlibet/ext/events/discord_status.py:46
 msgid "Discord status message"
@@ -1761,7 +1761,7 @@ msgstr ""
 #: quodlibet/qltk/renamefiles.py:259 quodlibet/qltk/tagsfrompath.py:154
 #: quodlibet/qltk/tracknumbers.py:111
 msgid "_Save"
-msgstr ""
+msgstr "_Salvesta"
 
 #: quodlibet/ext/events/gajim_status.py:30
 msgid "online"
@@ -2088,7 +2088,7 @@ msgstr "_Pealkiri:"
 
 #: quodlibet/ext/events/notify.py:86 quodlibet/ext/events/notify.py:121
 msgid "Revert to default pattern"
-msgstr ""
+msgstr "Taasta vaikimisi muster"
 
 #: quodlibet/ext/events/notify.py:110
 msgid "_Body:"
@@ -2338,15 +2338,15 @@ msgstr ""
 #: quodlibet/ext/events/rbimport.py:119
 #, python-format
 msgid "Successfully imported ratings and statistics for %d songs"
-msgstr ""
+msgstr "%d loo hinnangute ja statistika importimine õnnestus"
 
 #: quodlibet/ext/events/rbimport.py:126
 msgid "Rhythmbox Import"
-msgstr ""
+msgstr "Import Rhythmboxist"
 
 #: quodlibet/ext/events/rbimport.py:127
 msgid "Imports ratings and song statistics from Rhythmbox."
-msgstr ""
+msgstr "Impordi hinnangud ja statistika Rhythmboxist."
 
 #: quodlibet/ext/events/screensaver.py:27
 msgid "Screensaver Pause"
@@ -2551,12 +2551,12 @@ msgstr ""
 #: quodlibet/ext/events/synchronize_to_device.py:199
 #: quodlibet/qltk/renamefiles.py:182 quodlibet/qltk/tagsfrompath.py:116
 msgid "Path Patterns"
-msgstr ""
+msgstr "Asukohamustrid"
 
 #: quodlibet/ext/events/synchronize_to_device.py:200
 #: quodlibet/qltk/renamefiles.py:183 quodlibet/qltk/tagsfrompath.py:117
 msgid "Edit saved patterns…"
-msgstr ""
+msgstr "Muuda salvestatud asukohamustreid…"
 
 #: quodlibet/ext/events/synchronize_to_device.py:206
 msgid "The structure of the exported filenames, based on their tags"
@@ -3443,7 +3443,7 @@ msgstr ""
 
 #: quodlibet/ext/playorder/playcounteq.py:24
 msgid "Playcount Equalizer"
-msgstr ""
+msgstr "Esituskordade ekvalaiser"
 
 #: quodlibet/ext/playorder/playcounteq.py:25
 msgid "Adds a shuffle mode that prefers songs with fewer total plays."
@@ -3500,7 +3500,7 @@ msgstr ""
 #: quodlibet/ext/playorder/shufflebygrouping.py:32
 #: quodlibet/ext/playorder/shufflebygrouping.py:99
 msgid "Shuffle by Grouping"
-msgstr ""
+msgstr "Sega gruppide kaupa"
 
 #: quodlibet/ext/playorder/shufflebygrouping.py:34
 msgid ""
@@ -3513,7 +3513,7 @@ msgstr ""
 
 #: quodlibet/ext/playorder/shufflebygrouping.py:41
 msgid "Shuffle by grouping"
-msgstr ""
+msgstr "Sega gruppide kaupa"
 
 #: quodlibet/ext/playorder/shufflebygrouping.py:42
 msgid "Shuffle by _grouping"
@@ -4203,7 +4203,7 @@ msgstr ""
 #: quodlibet/ext/songsmenu/editplaycount.py:19
 #: quodlibet/ext/songsmenu/editplaycount.py:45
 msgid "Edit Playcount"
-msgstr ""
+msgstr "Esituskordi"
 
 #: quodlibet/ext/songsmenu/editplaycount.py:21
 msgid ""
@@ -4360,7 +4360,7 @@ msgstr ""
 
 #: quodlibet/ext/songsmenu/fingerprint/search.py:294
 msgid "Group by directory"
-msgstr ""
+msgstr "Grupeeri kaustade kaupa"
 
 #: quodlibet/ext/songsmenu/fingerprint/search.py:303
 msgid "Album Mode"
@@ -4495,11 +4495,11 @@ msgstr ""
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:176
 msgid "Import / Export"
-msgstr ""
+msgstr "Import / eksport"
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:177
 msgid "Imports and exports tags and track user data."
-msgstr ""
+msgstr "Impordib ja ekspordib silte ja lugude kasutamise andmeid."
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:206
 msgid "Further information"
@@ -4526,7 +4526,7 @@ msgstr ""
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:231
 msgid "User interaction on import"
-msgstr ""
+msgstr "Kinnitused importimisel"
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:235
 msgid "Require confirmation if number of tracks differs"
@@ -4560,12 +4560,12 @@ msgstr ""
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:304
 msgid "Delete export files after they've been imported"
-msgstr ""
+msgstr "Peale importimist kustuta eksportdifailid"
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:358
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:632
 msgid "Import"
-msgstr ""
+msgstr "Impordi"
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:373
 msgid "Open Export Directory"
@@ -4599,11 +4599,11 @@ msgstr ""
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:477
 msgid "Nothing to import"
-msgstr ""
+msgstr "Ei leidu mitte midagi imporditavat"
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:478
 msgid "You have to export something before you can import."
-msgstr ""
+msgstr "Enne importimist pead esmalt midagi eksportima."
 
 #: quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py:502
 msgid "The index was corrupt."
@@ -4943,7 +4943,7 @@ msgstr[1] ""
 
 #: quodlibet/main.py:49
 msgid "Music player and music library manager"
-msgstr ""
+msgstr "Muudikaesitaja ja muusikakogu haldur"
 
 #: quodlibet/operon/base.py:70
 #, python-format
@@ -5113,7 +5113,7 @@ msgstr ""
 
 #: quodlibet/operon/commands.py:724
 msgid "Rename files based on tags"
-msgstr ""
+msgstr "Muuda siltide alusel failinimesid"
 
 #: quodlibet/operon/commands.py:740
 msgid "Fill tags based on the file path"
@@ -5358,7 +5358,7 @@ msgstr ""
 
 #: quodlibet/qltk/advanced_prefs.py:69
 msgid "Revert to default"
-msgstr ""
+msgstr "Taasta vaikimisi väärtused"
 
 #: quodlibet/qltk/advanced_prefs.py:322
 msgid "I know what I'm doing!"
@@ -5541,22 +5541,22 @@ msgstr ""
 msgid ""
 "The selected songs will be removed from the library and their files moved to "
 "the trash."
-msgstr ""
+msgstr "Valitud lood eemaldatakse muusikakogust ja visatakse prügikasti."
 
 #: quodlibet/qltk/delete.py:120
 msgid "The selected files will be moved to the trash."
-msgstr ""
+msgstr "Valitud failid visatakse prügikasti."
 
 #: quodlibet/qltk/delete.py:125
 #, python-format
 msgid "Move %(file_count)d file to the trash?"
 msgid_plural "Move %(file_count)d files to the trash?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kas viskad %(file_count)d faili prügikasti?"
+msgstr[1] "Kas viskad %(file_count)d faili prügikasti?"
 
 #: quodlibet/qltk/delete.py:140 quodlibet/qltk/delete.py:146
 msgid "_Move to Trash"
-msgstr ""
+msgstr "_Viska prügikasti"
 
 #: quodlibet/qltk/delete.py:157 quodlibet/qltk/delete.py:193
 #, python-format
@@ -5565,11 +5565,11 @@ msgstr ""
 
 #: quodlibet/qltk/delete.py:179 quodlibet/qltk/delete.py:212
 msgid "Unable to move to trash"
-msgstr ""
+msgstr "Prügikasti viskamine ei õnnestu"
 
 #: quodlibet/qltk/delete.py:180 quodlibet/qltk/delete.py:213
 msgid "Moving one or more files to the trash failed."
-msgstr ""
+msgstr "Ühe või enama faili prügikasti viskamine ei õnnestunud."
 
 #: quodlibet/qltk/delete.py:223 quodlibet/qltk/delete.py:256
 #, python-format
@@ -5596,43 +5596,43 @@ msgstr ""
 #, python-format
 msgid "missing from %d song"
 msgid_plural "missing from %d songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "puudub %dst loost"
+msgstr[1] "puudub %dst loost"
 
 #: quodlibet/qltk/edittags.py:71 quodlibet/qltk/edittags.py:75
 #, python-format
 msgid "different across %d song"
 msgid_plural "different across %d songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d loo puhul erinev"
+msgstr[1] "%d loo puhul erinev"
 
 #: quodlibet/qltk/edittags.py:203
 msgid "Split into _Multiple Values"
-msgstr ""
+msgstr "Jaga eri _väärtusteks"
 
 #: quodlibet/qltk/edittags.py:227
 msgid "Split Disc out of _Album"
-msgstr ""
+msgstr "Eralda plaat _albumist"
 
 #: quodlibet/qltk/edittags.py:250
 msgid "Split _Version out of Title"
-msgstr ""
+msgstr "Eralda _versioon nimest"
 
 #: quodlibet/qltk/edittags.py:309
 msgid "Split Arranger out of Ar_tist"
-msgstr ""
+msgstr "Eralda arranžerija esi_tajast"
 
 #: quodlibet/qltk/edittags.py:314
 msgid "Split _Performer out of Artist"
-msgstr ""
+msgstr "Eralda _esineje esitajast"
 
 #: quodlibet/qltk/edittags.py:320
 msgid "Split _Performer out of Title"
-msgstr ""
+msgstr "Eralda _esineja nimest"
 
 #: quodlibet/qltk/edittags.py:326
 msgid "Split _Originalartist out of Title"
-msgstr ""
+msgstr "Eralda _algne esitaja nimest"
 
 #: quodlibet/qltk/edittags.py:332
 msgid "Add a Tag"
@@ -5721,7 +5721,13 @@ msgid_plural ""
 "\n"
 "The files currently selected do not support editing these tags."
 msgstr[0] ""
+"Vigane silt „ %s“\n"
+"\n"
+"Hetkel valitud faili(de) puhul pole võimalik seda silti muuta."
 msgstr[1] ""
+"Vigased sildid „ %s“\n"
+"\n"
+"Hetkel valitud faili(de) puhul pole võimalik seda silti muuta."
 
 #: quodlibet/qltk/edittags.py:981 quodlibet/qltk/edittags.py:1029
 msgid "Invalid value"
@@ -5832,7 +5838,7 @@ msgstr ""
 #: quodlibet/qltk/info.py:37
 #, python-format
 msgid "by %s"
-msgstr ""
+msgstr "esitajalt %s"
 
 #: quodlibet/qltk/info.py:38 quodlibet/qltk/information.py:169
 #: quodlibet/qltk/information.py:462
@@ -6047,11 +6053,13 @@ msgid ""
 "Tags have been changed but not saved. Save these files, or revert and "
 "discard changes?"
 msgstr ""
+"Sildid on muudetud, kuid muudatused on salvestamata. Kas salvestad failid "
+"või loobud neist ja taastad algse oleku?"
 
 #: quodlibet/qltk/msg.py:75 quodlibet/qltk/textedit.py:63
 #: quodlibet/qltk/tracknumbers.py:114
 msgid "_Revert"
-msgstr ""
+msgstr "_Taasta"
 
 #: quodlibet/qltk/msg.py:125
 msgid "File exists"
@@ -6258,7 +6266,7 @@ msgstr ""
 
 #: quodlibet/qltk/prefs.py:183 quodlibet/qltk/shortcuts.py:31
 msgid "Song List"
-msgstr ""
+msgstr "Lugude loend"
 
 #: quodlibet/qltk/prefs.py:268
 msgid "Edit Columns"
@@ -6284,7 +6292,7 @@ msgstr ""
 
 #: quodlibet/qltk/prefs.py:328 quodlibet/qltk/shortcuts.py:25
 msgid "Browsers"
-msgstr ""
+msgstr "Brauserid"
 
 #: quodlibet/qltk/prefs.py:334
 msgid "Confirm _multiple ratings"
@@ -6711,57 +6719,59 @@ msgstr ""
 
 #: quodlibet/qltk/renamefiles.py:52
 msgid "Replace spaces with _underscores"
-msgstr ""
+msgstr "Asenda tühikud alakriips_udega"
 
 #: quodlibet/qltk/renamefiles.py:62
 msgid "Replace [semi]colon delimiting with hyphens"
-msgstr ""
+msgstr "Asenda eraldav [semi]koolon sidekriipsuga"
 
 #: quodlibet/qltk/renamefiles.py:63
 msgid "e.g. \"iv: allegro.flac\" → \"iv - allegro.flac\""
-msgstr ""
+msgstr "näiteks „iv: allegro.flac“ → „iv - allegro.flac“"
 
 #: quodlibet/qltk/renamefiles.py:82
 msgid "Strip _Windows-incompatible characters"
-msgstr ""
+msgstr "Eemalda _Windowsiga mitteühilduvad tähemärgid"
 
 #: quodlibet/qltk/renamefiles.py:100
 msgid "Strip _diacritical marks"
-msgstr ""
+msgstr "Eemal_da tähtedelt täpid ja kriipsud"
 
 #: quodlibet/qltk/renamefiles.py:115
 msgid "Strip non-_ASCII characters"
-msgstr ""
+msgstr "Eemalda mitte-_ASCII tähemärgid"
 
 #: quodlibet/qltk/renamefiles.py:125
 msgid "Use only _lowercase characters"
-msgstr ""
+msgstr "Kasuta vaid _väiketähti"
 
 #: quodlibet/qltk/renamefiles.py:156
 msgid "Rename Files"
-msgstr ""
+msgstr "Muuda failide nimesid"
 
 #: quodlibet/qltk/renamefiles.py:187 quodlibet/qltk/tagsfrompath.py:121
 #: quodlibet/qltk/tracknumbers.py:55
 msgid "_Preview"
-msgstr ""
+msgstr "_Eelvaade"
 
 #: quodlibet/qltk/renamefiles.py:214
 msgid "File names"
-msgstr ""
+msgstr "Failinimed"
 
 #: quodlibet/qltk/renamefiles.py:224
 msgid "_Move album art"
-msgstr ""
+msgstr "_Teisalda albumite kaanepildid"
 
 #: quodlibet/qltk/renamefiles.py:228
 msgid ""
 "See '[albumart] search_filenames' config entry for which images will be moved"
 msgstr ""
+"Vaata „[albumart] search_filenames“ seadistust, mis määrab teisaldatavad "
+"pildid"
 
 #: quodlibet/qltk/renamefiles.py:235
 msgid "_Overwrite album art at target"
-msgstr ""
+msgstr "Asenda sihtkaustas _olevad kaanepildid"
 
 #: quodlibet/qltk/renamefiles.py:246
 msgid "_Remove empty directories"
@@ -6773,11 +6783,11 @@ msgstr "Albumite kaanepildid"
 
 #: quodlibet/qltk/renamefiles.py:281
 msgid "New Name"
-msgstr ""
+msgstr "Uus nimi"
 
 #: quodlibet/qltk/renamefiles.py:360
 msgid "Unable to rename file"
-msgstr ""
+msgstr "Faili nime muutmine ei õnnestu"
 
 #: quodlibet/qltk/renamefiles.py:362
 #, python-format
@@ -6786,24 +6796,26 @@ msgid ""
 "already exists, or you do not have permission to make the new file or remove "
 "the old one."
 msgstr ""
+"Nime muutmine „%(old-name)s“ -> „%(new-name)s“ ei õnnestu. Sihtfail võib "
+"juba olemas olla või puudub sul õigus uut faili luua või vana kustutada."
 
 #: quodlibet/qltk/renamefiles.py:373
 msgid "Ignore _All Errors"
-msgstr ""
+msgstr "Eira _kõiki vigu"
 
 #. Add stop/pause buttons. count = 0 means an indefinite
 #. number of steps.
 #: quodlibet/qltk/renamefiles.py:375 quodlibet/qltk/wlw.py:49
 msgid "_Stop"
-msgstr ""
+msgstr "_Peata"
 
 #: quodlibet/qltk/renamefiles.py:377
 msgid "_Continue"
-msgstr ""
+msgstr "_Jätka"
 
 #: quodlibet/qltk/renamefiles.py:488
 msgid "Path is not absolute"
-msgstr ""
+msgstr "Asukoht pole absoluutne"
 
 #: quodlibet/qltk/renamefiles.py:490
 #, python-format
@@ -6813,6 +6825,10 @@ msgid ""
 "contains / but does not start from root. To avoid misnamed folders, root "
 "your pattern by starting it with / or ~/."
 msgstr ""
+"%s\n"
+"asukohamuster\n"
+"sisaldab kaldkriipsu (/), aga ei alga juurkaustast.Vältimaks tekkivaid "
+"vigaseid kaustanimesid alusta mustrit kas / või ~/ märkega."
 
 #: quodlibet/qltk/scanbox.py:51
 msgid ""
@@ -6930,79 +6946,79 @@ msgstr ""
 
 #: quodlibet/qltk/shortcuts.py:17
 msgid "Main Window"
-msgstr ""
+msgstr "Põhiaken"
 
 #: quodlibet/qltk/shortcuts.py:19
 msgid "Seek backwards by 10 seconds"
-msgstr ""
+msgstr "Keri 10 sekundit tagasi"
 
 #: quodlibet/qltk/shortcuts.py:20
 msgid "Seek forward by 10 seconds"
-msgstr ""
+msgstr "Keri 10 sekundit edasi"
 
 #: quodlibet/qltk/shortcuts.py:21
 msgid "Focus the search entry"
-msgstr ""
+msgstr "Fookus otsingusisestusele"
 
 #: quodlibet/qltk/shortcuts.py:27
 msgid "Reset filters and jump to the playing song"
-msgstr "Eemalda filtrid ja mineesitamisel loo juurde"
+msgstr "Eemalda filtrid ja mine esitamisel loo juurde"
 
 #: quodlibet/qltk/shortcuts.py:33
 msgid "Open the information window for the selected songs"
-msgstr ""
+msgstr "Ava valitud lugude infovaade"
 
 #: quodlibet/qltk/shortcuts.py:34
 msgid "Open the tag editor for the selected songs"
-msgstr ""
+msgstr "Ava valitud lugude siltide muutmisvaade"
 
 #: quodlibet/qltk/shortcuts.py:35
 msgid "Queue the selected songs"
-msgstr ""
+msgstr "Lisa valitud lood esitusjärjekorda"
 
 #: quodlibet/qltk/shortcuts.py:36
 msgid "Delete the selected songs"
-msgstr ""
+msgstr "Kustuta valitud lood"
 
 #: quodlibet/qltk/shortcuts.py:37
 msgid "Show the inline search entry"
-msgstr ""
+msgstr "Näita kiirotsingu sisestusvaadet"
 
 #: quodlibet/qltk/shortcuts.py:41
 msgid "Left click on a column header"
-msgstr ""
+msgstr "Vasak hiireklõps veerupäisel"
 
 #: quodlibet/qltk/shortcuts.py:43
 msgid "Add the column to the list of columns to sort by"
-msgstr ""
+msgstr "Lisa veerg järjestamise aluseks"
 
 #: quodlibet/qltk/shortcuts.py:48
 msgid "Tree View"
-msgstr ""
+msgstr "Puuvaade"
 
 #: quodlibet/qltk/shortcuts.py:52
 msgid "Collapses the element or select the parent element"
-msgstr ""
+msgstr "Ahendab valitud haru või valib ülemharu"
 
 #: quodlibet/qltk/shortcuts.py:54
 msgid "Expands the element"
-msgstr ""
+msgstr "Laiendab antud haru"
 
 #: quodlibet/qltk/shortcuts.py:58
 msgid "Text Entries"
-msgstr ""
+msgstr "Tekstiväljad"
 
 #: quodlibet/qltk/shortcuts.py:60
 msgid "Undo the last change"
-msgstr ""
+msgstr "Võta viimane muudatus tagasi"
 
 #: quodlibet/qltk/shortcuts.py:61
 msgid "Redo the last undone change"
-msgstr ""
+msgstr "Korda viimast tagasivõetud muudatust"
 
 #: quodlibet/qltk/shortcuts.py:67
 msgid "Select all songs in all panes"
-msgstr ""
+msgstr "Vali kõik lood kõikides paanides"
 
 #. Translators: The substituted string is the name of the
 #. selected column (a translated tag name).
@@ -7134,27 +7150,27 @@ msgstr "Lisa _esitusjärjekorda"
 
 #: quodlibet/qltk/tagsfrompath.py:47
 msgid "Replace _underscores with spaces"
-msgstr ""
+msgstr "Asenda alakriips_ud tühikutega"
 
 #: quodlibet/qltk/tagsfrompath.py:57
 msgid "_Title-case tags"
-msgstr ""
+msgstr "Esisuur_tähed siltides"
 
 #: quodlibet/qltk/tagsfrompath.py:67
 msgid "Split into multiple _values"
-msgstr ""
+msgstr "Jaga eri _väärtusteks"
 
 #: quodlibet/qltk/tagsfrompath.py:99
 msgid "Tags From Path"
-msgstr ""
+msgstr "Lisa sildid asukohast"
 
 #: quodlibet/qltk/tagsfrompath.py:139
 msgid "Tags replace existing ones"
-msgstr ""
+msgstr "Sildid asendavad olemasolevaid"
 
 #: quodlibet/qltk/tagsfrompath.py:140
 msgid "Tags are added to existing ones"
-msgstr ""
+msgstr "Sildid lisanduvad olemasolevatele"
 
 #: quodlibet/qltk/tagsfrompath.py:198
 #, python-format
@@ -7164,6 +7180,10 @@ msgid ""
 "is invalid. Possibly it contains the same tag twice or it has unbalanced "
 "brackets (&lt; / &gt;)."
 msgstr ""
+"%s\n"
+"muster\n"
+"on vigane. Võimalik, et mõni silt on topelt või on sulud sassis (&lt; / "
+"&gt;)."
 
 #: quodlibet/qltk/textedit.py:142
 #, python-format
@@ -7184,7 +7204,7 @@ msgstr "Palade numbrid"
 
 #: quodlibet/qltk/tracknumbers.py:40
 msgid "Start fro_m:"
-msgstr ""
+msgstr "Alusta nu_mbrist:"
 
 #: quodlibet/qltk/tracknumbers.py:48
 msgid "_Total tracks:"
