@@ -60,6 +60,7 @@ quodlibet/ext/events/mqtt.py
 quodlibet/ext/events/musicbrainzsync.py
 quodlibet/ext/events/notify.py
 quodlibet/ext/events/notify_bookmarks.py
+quodlibet/ext/events/pomodoro.py
 quodlibet/ext/events/qlscrobbler.py
 quodlibet/ext/events/radioadmute.py
 quodlibet/ext/events/randomalbum.py
