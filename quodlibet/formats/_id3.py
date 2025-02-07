@@ -471,7 +471,7 @@ class ID3File(AudioFile):
             tag.add(t)
 
         with translate_errors():
-            audio.save()
+            audio.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
         self.sanitize()
 
     can_change_images = True
@@ -484,7 +484,7 @@ class ID3File(AudioFile):
 
             if audio.tags is not None:
                 audio.tags.delall("APIC")
-                audio.save()
+                audio.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
 
         self.has_images = False
 
@@ -562,6 +562,6 @@ class ID3File(AudioFile):
         tag.add(frame)
 
         with translate_errors():
-            audio.save()
+            audio.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
 
         self.has_images = True

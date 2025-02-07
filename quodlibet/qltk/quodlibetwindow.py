@@ -439,6 +439,8 @@ MENU = """
       <menuitem action='Preferences' always-show-image='true'/>
       <menuitem action='Plugins' always-show-image='true'/>
       <separator/>
+      <menuitem action='PreserveMTime' always-show-image='true'/>
+      <separator/>
       <menuitem action='RefreshLibrary' always-show-image='true'/>
       <separator/>
       <menuitem action='Quit' always-show-image='true'/>
@@ -1062,6 +1064,15 @@ class QuodLibetWindow(Window, PersistentWindowMixin, AppWindow):
         act.connect("activate", self.__rebuild, False)
         ag.add_action_with_accel(act, "<Primary>R")
 
+        def check_mtime_handler(*args):
+            config.set("editing", "preserve_mtime", str(args[0].get_active()))
+
+        act = ToggleAction(
+            name="PreserveMTime", label=_("_Preserve modified time")
+        )
+        act.connect("activate", check_mtime_handler)
+        ag.add_action_with_accel(act, "<Primary>P")
+
         current = config.get("memory", "browser")
         try:
             browsers.get(current)
@@ -1120,6 +1131,9 @@ class QuodLibetWindow(Window, PersistentWindowMixin, AppWindow):
         ui.get_widget("/Menu/File/RefreshLibrary").set_tooltip_text(
             _("Check for changes in your library")
         )
+
+        ui.get_widget("/Menu/File/PreserveMTime").set_tooltip_text(
+            _("Do not overwrite file modified time on file update"))
 
         return ui
 

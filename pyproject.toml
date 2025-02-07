@@ -26,7 +26,7 @@ quodlibet = "quodlibet.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-mutagen = "^1.45"
+mutagen = "^1.47.1"
 feedparser = "^6.0.11"
 pycairo = "^1.19"
 pygobject = "^3.34.0"

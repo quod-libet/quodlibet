@@ -8,6 +8,7 @@
 import mutagen.apev2
 
 from quodlibet.util.path import get_temp_cover_file
+from quodlibet import config
 
 from ._audio import AudioFile
 from ._image import APICType, EmbeddedImage
@@ -201,7 +202,7 @@ class APEv2File(AudioFile):
                 if cover_type is not None:
                     del tag[key]
 
-            tag.save()
+            tag.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
 
         self.has_images = False
 

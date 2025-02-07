@@ -10,6 +10,7 @@ import struct
 import mutagen.asf
 
 from quodlibet.util.path import get_temp_cover_file
+from quodlibet import config
 
 from ._audio import AudioFile
 from ._image import EmbeddedImage, APICType
@@ -142,7 +143,7 @@ class WMAFile(AudioFile):
                 continue
             audio.tags[name] = self.list(key)
         with translate_errors():
-            audio.save()
+            audio.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
         self.sanitize()
 
     def can_multiple_values(self, key=None):
@@ -201,7 +202,7 @@ class WMAFile(AudioFile):
         with translate_errors():
             tag = mutagen.asf.ASF(self["~filename"])
             tag.pop("WM/Picture", None)
-            tag.save()
+            tag.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
 
         self.has_images = False
 
@@ -223,7 +224,7 @@ class WMAFile(AudioFile):
         tag["WM/Picture"] = [value]
 
         with translate_errors():
-            tag.save()
+            tag.save(preserve_mtime=config.getboolean("editing", "preserve_mtime"))
 
         self.has_images = True
 
