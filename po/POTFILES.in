@@ -133,6 +133,7 @@ quodlibet/ext/songsmenu/ifp.py
 quodlibet/ext/songsmenu/import_export_tags_and_track_user_data.py
 quodlibet/ext/songsmenu/lastfmsync.py
 quodlibet/ext/songsmenu/makesorttags.py
+quodlibet/ext/songsmenu/musicbee_rating.py
 quodlibet/ext/songsmenu/playlist.py
 quodlibet/ext/songsmenu/refresh.py
 quodlibet/ext/songsmenu/replaygain.py
