@@ -1,0 +1,9 @@
+diff -Nru Python-3.11.3-orig/Modules/Setup.local Python-3.11.3/Modules/Setup.local
+--- /dev/null	2025-01-21 13:18:12
++++ Python-3.11.3/Modules/Setup.local	2025-01-21 13:18:12
+@@ -0,0 +1,5 @@
++# Have _ssl built by Modules/Setup rather than the top-level setup.py
++# script, because the top-level script doesn't honor the top-level "--with-openssl"
++# configure parameter, and we need that to find the openssl implementation in our
++# bundle.
++_ssl _ssl.c $(OPENSSL_INCLUDES) $(OPENSSL_LDFLAGS) $(OPENSSL_LIBS)

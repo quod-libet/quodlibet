@@ -406,20 +406,19 @@
     </dependencies>
   </autotools>
 
-  <!-- INSTALL_PREFIX because it doesn't use DESTDIR and LIBS="" to skip installing static libs -->
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared zlib-dynamic"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
-             makeinstallargs="INSTALL_PREFIX=$JHBUILD_PREFIX/_jhbuild/root-openssl LIBS= install_sw"
              supports-non-srcdir-builds="no">
     <branch module="openssl-1.1.1t.tar.gz" version="1.1.1.t" repo="openssl"
             hash="sha256:8dee9b24bdb1dcbf0c3d1e9b02fb8f6bf22165e807f45adeb7c9677536859d3b"/>
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared --without-ensurepip"
+  <autotools id="python" autogenargs="--enable-shared --without-ensurepip --with-openssl=$JHBUILD_PREFIX --with-openssl-rpath"
          autogen-sh="configure" supports-non-srcdir-builds="no">
     <branch repo="python"
         module="${version}/Python-${version}.tar.xz" version="3.11.3"
         hash="sha256:8a5db99c961a7ecf27c75956189c9602c968751f11dbeae2b900dbff1c085b5e">
+        <patch file="patches/Python-use-ssl-from-bundle.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gettext"/>
