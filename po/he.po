@@ -4864,19 +4864,19 @@ msgstr "עדכון הנתונים הסטטיסטיים של הספרייה מפ�
 msgid "_Username:"
 msgstr "_שם משתש:"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:79
+#: quodlibet/ext/songsmenu/makesorttags.py:81
 msgid "Create Sort Tags"
 msgstr "יצירת תגי מיון"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
 msgstr ""
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
 msgstr ""
 
-#: quodlibet/ext/songsmenu/makesorttags.py:86
+#: quodlibet/ext/songsmenu/makesorttags.py:88
 #, python-format
 msgid "Applies to tags: <tt>%s</tt>."
 msgstr ""
