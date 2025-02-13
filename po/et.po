@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-20 18:00+0000\n"
+"PO-Revision-Date: 2025-01-30 15:01+0000\n"
 "Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/et/>\n"
@@ -732,8 +732,8 @@ msgstr "Kogu valitud esitusloendi teave kustutatakse ja seda ei saa taastada."
 #, python-brace-format
 msgid "Extend \"{pl_name}\" with {num} additional track?"
 msgid_plural "Extend \"{pl_name}\" with {num} additional tracks?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kas täiendame „{pl_name}“ esitusloendit {num} lisalooga?"
+msgstr[1] "Kas täiendame „{pl_name}“ esitusloendit {num} lisalooga?"
 
 #: quodlibet/browsers/playlists/util.py:65
 msgid "_Add Tracks"
@@ -814,19 +814,23 @@ msgid ""
 "%s could not be added. The server may be down, or the location may not be a "
 "podcast / audio feed."
 msgstr ""
+"%s lisamine ei õnnestunud. Võib-olla ei tööta server või antud aadress pole "
+"taskuhäälingu ega helivoo aadress."
 
 #: quodlibet/browsers/podcasts.py:589
 msgid ""
 "The current audio backend does not support URLs, Podcast browser disabled."
 msgstr ""
+"Hetkel kasutatav heli taustateenus ei toeta võrguaadresse ja taskuhäälingute "
+"sirvija on välja lülitatud."
 
 #: quodlibet/browsers/tracks.py:33
 msgid "_Limit Results"
-msgstr ""
+msgstr "Piira tu_lemuste arvu"
 
 #: quodlibet/browsers/tracks.py:39
 msgid "_Allow multiple queries"
-msgstr ""
+msgstr "Lub_a mitu päringut"
 
 #: quodlibet/browsers/tracks.py:54 quodlibet/qltk/information.py:480
 msgid "Track List"
@@ -895,27 +899,27 @@ msgstr "Sisesta Soundcloudi autentimiskood:"
 
 #: quodlibet/cli.py:54
 msgid "Quod Libet is not running (add '--run' to start it)"
-msgstr ""
+msgstr "Quod Libet ei tööta (käivitamiseks lisa „--run“)"
 
 #: quodlibet/cli.py:116
 msgid "a music library and player"
-msgstr ""
+msgstr "muusikakogu ja meediaesitaja"
 
 #: quodlibet/cli.py:116
 msgid "[option]"
-msgstr ""
+msgstr "[valik]"
 
 #: quodlibet/cli.py:119
 msgid "Print the playing song and exit"
-msgstr ""
+msgstr "Näita esitamisel oleva loo teave ja lõpeta töö"
 
 #: quodlibet/cli.py:120
 msgid "Begin playing immediately"
-msgstr ""
+msgstr "Alusta esitamist kohe"
 
 #: quodlibet/cli.py:121
 msgid "Don't show any windows on start"
-msgstr ""
+msgstr "Käivitamisel ära näita ühtegi akent"
 
 #: quodlibet/cli.py:124
 msgid "Jump to next song"
@@ -1058,12 +1062,12 @@ msgstr "otsing"
 
 #: quodlibet/cli.py:160
 msgid "Play a file"
-msgstr ""
+msgstr "Esita faili"
 
 #: quodlibet/cli.py:160 quodlibet/cli.py:171 quodlibet/cli.py:182
 msgctxt "command"
 msgid "filename"
-msgstr ""
+msgstr "failinimi"
 
 #: quodlibet/cli.py:161
 msgid "Set rating of playing song"
@@ -1197,7 +1201,7 @@ msgstr ""
 
 #: quodlibet/errorreport/ui.py:112
 msgid "Short description…"
-msgstr ""
+msgstr "Lühikirjeldus…"
 
 #: quodlibet/errorreport/ui.py:115
 msgid "Data to be sent:"
