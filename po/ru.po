@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Quod Libet 4.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-25 11:38+0100\n"
-"PO-Revision-Date: 2025-01-17 10:35+0000\n"
+"PO-Revision-Date: 2025-02-07 04:15+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/ru/>\n"
@@ -620,13 +620,13 @@ msgid "Columnar"
 msgstr "Столбчатый"
 
 #: quodlibet/browsers/paned/prefs.py:109
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid ""
 "Tag pattern with optional markup e.g. <tt>composer</tt> or\n"
 "{example}"
 msgstr ""
-"Шаблон тега с дополнительной разметкой, например: \n"
-"<tt>композитор</tt> или %s"
+"Шаблон тега с дополнительной разметкой, напр.: <tt>композитор</tt> или\n"
+"{example}"
 
 #: quodlibet/browsers/paned/prefs.py:231
 msgid "Paned Browser Preferences"
@@ -4929,7 +4929,7 @@ msgstr "Создать теги сортировки"
 
 #: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
-msgstr ""
+msgstr "Угадывает теги сортировки для альбомов и авторов."
 
 #: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
@@ -5064,12 +5064,11 @@ msgstr "Отделить номер диска."
 
 #: quodlibet/ext/songsmenu/splitting.py:79
 msgid "Split Genre"
-msgstr ""
+msgstr "Разделить жанр"
 
 #: quodlibet/ext/songsmenu/splitting.py:80
-#, fuzzy
 msgid "Split a single genre tag into multiple tags."
-msgstr "Р_азделить на несколько значений"
+msgstr "Разделить один тег жанра на несколько тегов."
 
 #: quodlibet/ext/songsmenu/tapbpm.py:23 quodlibet/ext/songsmenu/tapbpm.py:32
 #: quodlibet/ext/songsmenu/tapbpm.py:61
@@ -5479,9 +5478,9 @@ msgid "Buffering"
 msgstr "Буферизация"
 
 #: quodlibet/player/gstbe/player.py:485
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Could not create GStreamer pipeline ({e})"
-msgstr "Не удалось создать конвейер GStreamer (%s)"
+msgstr "Не удалось создать конвейер GStreamer ({e})"
 
 #: quodlibet/player/gstbe/player.py:687
 msgid "No GStreamer element found to handle media format"
