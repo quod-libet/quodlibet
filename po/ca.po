@@ -801,7 +801,8 @@ msgstr "_Reconstrueix"
 
 #: quodlibet/browsers/podcasts.py:496
 msgid "Remove all existing episodes then reload from source"
-msgstr "Suprimeix tots els episodis existents i torna a carregar des de la font"
+msgstr ""
+"Suprimeix tots els episodis existents i torna a carregar des de la font"
 
 #: quodlibet/browsers/podcasts.py:501
 msgid "Remove this podcast and its episodes"
@@ -1329,8 +1330,8 @@ msgstr "Majúscules inicials a cada _paraula"
 msgid ""
 "Uses common English rules for title casing, as in \"Dark Night of the Soul\""
 msgstr ""
-"Utilitza les regles habituals en anglès per les majúscules inicials, com a «"
-"Dark Night of the Soul»"
+"Utilitza les regles habituals en anglès per les majúscules inicials, com a "
+"«Dark Night of the Soul»"
 
 #: quodlibet/ext/events/animosd/main.py:27
 msgid "Animated On-Screen Display"
@@ -1630,7 +1631,8 @@ msgstr "Importació del Banshee"
 
 #: quodlibet/ext/events/bansheeimport.py:129
 msgid "Imports ratings and song statistics from Banshee."
-msgstr "Importa les valoracions i les estadístiques de les cançons del Banshee."
+msgstr ""
+"Importa les valoracions i les estadístiques de les cançons del Banshee."
 
 #: quodlibet/ext/events/bansheeimport.py:138
 msgid "_Database path:"
@@ -1990,8 +1992,8 @@ msgstr ""
 msgid ""
 "Ensure the following is in your rygel config file (~/.config/rygel.conf):"
 msgstr ""
-"Assegureu-vos d'afegir el següent al fitxer de configuració del Rygel (~/"
-".config/rygel.conf):"
+"Assegureu-vos d'afegir el següent al fitxer de configuració del Rygel (~/."
+"config/rygel.conf):"
 
 #: quodlibet/ext/events/mpdserver/__init__.py:62
 msgid "MPD Server"
@@ -2554,8 +2556,8 @@ msgid ""
 "Shares configuration with <a href=\"%(plugin_link)s\">Export to Squeezebox "
 "plugin</a>."
 msgstr ""
-"Comparteix la configuració amb el connector <a href=\"%(plugin_link)s\""
-">Exporta a Squeezebox</a>."
+"Comparteix la configuració amb el connector <a "
+"href=\"%(plugin_link)s\">Exporta a Squeezebox</a>."
 
 #: quodlibet/ext/events/squeezebox_sync.py:66
 #: quodlibet/ext/playlist/export_to_squeezebox.py:101
@@ -2583,8 +2585,8 @@ msgid ""
 "Seekable Sources' is off. Otherwise, playback is left stopped and must be "
 "restarted from the beginning."
 msgstr ""
-"Aquest connector canvia l'opció Posa en pausa per Atura / Reprodueix / Cerca."
-"\n"
+"Aquest connector canvia l'opció Posa en pausa per Atura / Reprodueix / "
+"Cerca.\n"
 "\n"
 "És útil si el Quod Libet no pot canviar entre dispositius d'àudio quan se "
 "n'afegeix un de nou (altaveu Bluetooth, DAC USB, etc.) al sistema.\n"
@@ -3565,8 +3567,8 @@ msgid ""
 "Shares configuration with <a href=\"%(plugin_link)s\">Squeezebox Sync "
 "plugin</a>."
 msgstr ""
-"Comparteix la configuració amb el connector <a href=\"%(plugin_link)s\""
-">Sincronització amb Squeezebox</a>."
+"Comparteix la configuració amb el connector <a "
+"href=\"%(plugin_link)s\">Sincronització amb Squeezebox</a>."
 
 #: quodlibet/ext/playlist/export_to_squeezebox.py:88
 msgid "Export playlist to Squeezebox"
@@ -3598,7 +3600,8 @@ msgstr[1] "Segur que voleu suprimir %d cançons duplicades?"
 #: quodlibet/ext/playlist/remove_duplicates.py:58
 #, python-format
 msgid "The duplicate songs will be removed from the playlist '%s'."
-msgstr "Les cançons duplicades se suprimiran de la llista de reproducció '«%s»."
+msgstr ""
+"Les cançons duplicades se suprimiran de la llista de reproducció '«%s»."
 
 #: quodlibet/ext/playlist/shuffle.py:15
 msgid "Shuffle Playlist"
@@ -4461,8 +4464,8 @@ msgid ""
 "and <tt>~#laststarted</tt> entries will be cleared. However, when setting a "
 "0-play song to a positive play count, no play times will be created."
 msgstr ""
-"Edita les etiquetes <tt>~#playcount</tt> i <tt>~#skipcount d'una cançó.</tt>"
-"\n"
+"Edita les etiquetes <tt>~#playcount</tt> i <tt>~#skipcount d'una cançó.</"
+"tt>\n"
 "\n"
 "Quan se seleccionen diverses cançons, els recomptes s'incrementaran en lloc "
 "de definir-se.\n"
@@ -4569,8 +4572,8 @@ msgid ""
 "Generates acoustic fingerprints using chromaprint and submits them to "
 "acoustid.org."
 msgstr ""
-"Genera empremtes digitals acústiques amb Chromaprint i les envia a "
-"acoustid.org."
+"Genera empremtes digitals acústiques amb Chromaprint i les envia a acoustid."
+"org."
 
 #: quodlibet/ext/songsmenu/fingerprint/__init__.py:65
 msgid "API Key Missing"
@@ -4959,19 +4962,19 @@ msgstr ""
 msgid "_Username:"
 msgstr "Nom d'_usuari:"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:79
+#: quodlibet/ext/songsmenu/makesorttags.py:81
 msgid "Create Sort Tags"
 msgstr "Crea les etiquetes d'ordenació"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
 msgstr "Genera les etiquetes d'ordenació dels àlbums i persones."
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
 msgstr "Per exemple:"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:86
+#: quodlibet/ext/songsmenu/makesorttags.py:88
 #, python-format
 msgid "Applies to tags: <tt>%s</tt>."
 msgstr "S'aplica a les etiquetes: <tt>%s</tt>."
@@ -5405,7 +5408,8 @@ msgstr "No s'ha pogut carregar el fitxer d'imatge: %r"
 #: quodlibet/operon/commands.py:601 quodlibet/operon/commands.py:631
 #, python-format
 msgid "Image editing not supported for %(file_name)s (%(file_format)s)"
-msgstr "L'edició d'imatges no és compatible amb %(file_name)s (%(file_format)s)"
+msgstr ""
+"L'edició d'imatges no és compatible amb %(file_name)s (%(file_format)s)"
 
 #: quodlibet/operon/commands.py:617
 msgid "Remove all embedded images"
@@ -7317,7 +7321,8 @@ msgstr "Cerca després d'es_criure"
 
 #: quodlibet/qltk/searchbar.py:156
 msgid "Show search results after the user stops typing"
-msgstr "Mostra els resultats de la cerca després que l'usuari deixi d'escriure."
+msgstr ""
+"Mostra els resultats de la cerca després que l'usuari deixi d'escriure."
 
 #: quodlibet/qltk/searchbar.py:224
 msgid "_Limit:"
@@ -7589,8 +7594,8 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"El patró que heu introduït no és vàlid. Assegureu-vos d'introduir &lt; i &gt;"
-" com a \\&lt; i \\&gt; i que les etiquetes estiguin aparellades.\n"
+"El patró que heu introduït no és vàlid. Assegureu-vos d'introduir &lt; i "
+"&gt; com a \\&lt; i \\&gt; i que les etiquetes estiguin aparellades.\n"
 "\n"
 "%s"
 
@@ -7809,8 +7814,8 @@ msgid ""
 "The date must be entered in 'YYYY', 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS' "
 "format."
 msgstr ""
-"La data s'ha d'introduir en el format «AAAA», «AAAA-MM-DD» o «AAAA-MM-DD "
-"HH:MM:SS»."
+"La data s'ha d'introduir en el format «AAAA», «AAAA-MM-DD» o «AAAA-MM-DD HH:"
+"MM:SS»."
 
 #: quodlibet/util/massagers.py:132
 msgid "Replay Gain gains must be entered in 'x.yy dB' format."

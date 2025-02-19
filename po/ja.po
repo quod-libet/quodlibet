@@ -4863,19 +4863,19 @@ msgstr "Last.fm のプロフィールからライブラリの統計情報を更�
 msgid "_Username:"
 msgstr "ユーザー名(_U):"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:79
+#: quodlibet/ext/songsmenu/makesorttags.py:81
 msgid "Create Sort Tags"
 msgstr "ソートタグの生成"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
 msgstr "アルバムや人物のソートタグを推測します。"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
 msgstr "例"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:86
+#: quodlibet/ext/songsmenu/makesorttags.py:88
 #, python-format
 msgid "Applies to tags: <tt>%s</tt>."
 msgstr "適用されるタグ: <tt>%s</tt>."

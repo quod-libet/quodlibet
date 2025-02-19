@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Quod Libet 0.23\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-25 11:38+0100\n"
-"PO-Revision-Date: 2023-10-24 08:03+0000\n"
-"Last-Translator: Jej <weblate@gogomail.trickip.net>\n"
+"PO-Revision-Date: 2025-02-02 04:22+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/pt/>\n"
 "Language: pt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: quodlibet/browsers/albums/main.py:226
 #: quodlibet/browsers/covergrid/main.py:57
@@ -1776,7 +1776,7 @@ msgid "The current backend does not support equalization."
 msgstr "O backend atual não tem suporte a equalização."
 
 #: quodlibet/ext/events/equalizer.py:379
-#, python-format
+#, fuzzy, python-format
 msgid "%.1f kHz"
 msgstr "%1f kHz"
 
@@ -1789,7 +1789,7 @@ msgstr "%d Hz"
 
 #: quodlibet/ext/events/equalizer.py:421
 #: quodlibet/ext/gstreamer/crossfeed.py:129
-#, python-format
+#, fuzzy, python-format
 msgid "%.1f dB"
 msgstr "%1f dB"
 
@@ -4989,19 +4989,19 @@ msgstr ""
 msgid "_Username:"
 msgstr "Nome de _usuário:"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:79
+#: quodlibet/ext/songsmenu/makesorttags.py:81
 msgid "Create Sort Tags"
 msgstr "Criar etiquetas de ordenação"
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
 msgstr ""
 
-#: quodlibet/ext/songsmenu/makesorttags.py:81
+#: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
 msgstr ""
 
-#: quodlibet/ext/songsmenu/makesorttags.py:86
+#: quodlibet/ext/songsmenu/makesorttags.py:88
 #, python-format
 msgid "Applies to tags: <tt>%s</tt>."
 msgstr ""
