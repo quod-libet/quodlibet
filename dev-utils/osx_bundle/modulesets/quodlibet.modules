@@ -515,6 +515,7 @@
   <meson id="gtk3" mesonargs="-Dexamples=false -Dtests=false -Dquartz_backend=true -Dx11_backend=false">
     <branch module="gtk+/3.24/gtk+-${version}.tar.xz"  version="3.24.38"
             hash="sha256:ce11decf018b25bdd8505544a4f87242854ec88be054d9ade5f3a20444dd8ee7">
+      <patch file="patches/gtk+-pulldown-menu-modifier.patch" strip="1"/>
     </branch>
     <dependencies>
         <dep package="glib2"/>

@@ -62,7 +62,7 @@ class Volume(Gtk.VolumeButton):
         if event.type != Gdk.EventType.BUTTON_PRESS:
             return False
 
-        if event.button == Gdk.BUTTON_SECONDARY:
+        if event.triggers_context_menu():
             qltk.popup_menu_at_widget(menu, self, event.button, event.time)
             return True
         elif event.button == Gdk.BUTTON_MIDDLE:

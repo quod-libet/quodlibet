@@ -573,5 +573,5 @@ class Equalizer(EventPlugin):
         return main_vbox
 
     def __rightclick(self, hs, event):
-        if event.button == Gdk.BUTTON_SECONDARY:
+        if event.triggers_context_menu():
             hs.set_value(0)

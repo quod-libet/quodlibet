@@ -1,0 +1,40 @@
+# Patch gtk+ to recognize control-click as a way to activate pulldown menus.
+# This is documented gtk+ behavior but was broken some time before
+# 3.24.38 (see https://gitlab.gnome.org/GNOME/gtk/-/issues/6724).
+# It's fixed in GTK 4.16, but that's a really big jump from 3.24.38 for
+# one bug fix.
+# This fix is their commit 4b5d503c, backported to gtk+ 3.
+diff -ruw gtk+-3.24.38-orig/gdk/gdkevents.c gtk+-3.24.38/gdk/gdkevents.c
+--- gtk+-3.24.38-orig/gdk/gdkevents.c	2025-01-06 15:02:03
++++ gtk+-3.24.38/gdk/gdkevents.c	2025-01-06 15:03:46
+@@ -1883,8 +1883,6 @@
+   if (event->type == GDK_BUTTON_PRESS)
+     {
+       const GdkEventButton *bevent = (const GdkEventButton *) event;
+-      GdkDisplay *display;
+-      GdkModifierType modifier;
+ 
+       g_return_val_if_fail (GDK_IS_WINDOW (bevent->window), FALSE);
+ 
+@@ -1892,16 +1890,12 @@
+           ! (bevent->state & (GDK_BUTTON1_MASK | GDK_BUTTON2_MASK)))
+         return TRUE;
+ 
+-      display = gdk_window_get_display (bevent->window);
+-
+-      modifier = gdk_keymap_get_modifier_mask (gdk_keymap_get_for_display (display),
+-                                               GDK_MODIFIER_INTENT_CONTEXT_MENU);
+-
+-      if (modifier != 0 &&
+-          bevent->button == GDK_BUTTON_PRIMARY &&
+-          ! (bevent->state & (GDK_BUTTON2_MASK | GDK_BUTTON3_MASK)) &&
+-          (bevent->state & modifier))
++#ifdef __APPLE__
++      if (bevent->button == GDK_BUTTON_PRIMARY &&
++          (bevent->state & GDK_CONTROL_MASK) &&
++          ! (bevent->state & (GDK_BUTTON1_MASK | GDK_BUTTON2_MASK)))
+         return TRUE;
++#endif
+     }
+ 
+   return FALSE;

@@ -1298,7 +1298,7 @@ class SongList(AllTreeView, SongListDnDMixin, DragScroll, util.InstanceTracker):
     def __showmenu(self, column, event=None):
         time = event.time if event else Gtk.get_current_event_time()
 
-        if event is not None and event.button != Gdk.BUTTON_SECONDARY:
+        if event is not None and not event.triggers_context_menu():
             return False
 
         menu = self._menu(column)
