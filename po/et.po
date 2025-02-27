@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-25 19:10+0000\n"
+"PO-Revision-Date: 2025-02-27 08:25+0000\n"
 "Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/et/>\n"
@@ -1236,27 +1236,27 @@ msgstr ""
 
 #: quodlibet/ext/covers/discogs.py:28
 msgid "Discogs Cover Source"
-msgstr ""
+msgstr "Kaanepilt Discogsi saidist"
 
 #: quodlibet/ext/covers/discogs.py:29
 msgid "Downloads covers from Discogs."
-msgstr ""
+msgstr "Laadib kaanepildid Discogsi saidist."
 
 #: quodlibet/ext/covers/lastfm.py:20
 msgid "Last.fm Cover Source"
-msgstr ""
+msgstr "Kaanepilt Last.fm-i saidist"
 
 #: quodlibet/ext/covers/lastfm.py:21
 msgid "Downloads covers from Last.fm's cover art archive."
-msgstr ""
+msgstr "Laadib kaanepildid Last.fm-i kaanepiltide arhiivist."
 
 #: quodlibet/ext/covers/musicbrainz.py:20
 msgid "MusicBrainz Cover Source"
-msgstr ""
+msgstr "Kaanepilt MusicBrainzi saidist"
 
 #: quodlibet/ext/covers/musicbrainz.py:21
 msgid "Downloads covers from MusicBrainz's cover art archive."
-msgstr ""
+msgstr "Laadib kaanepildid MusicBrainzi kaanepiltide arhiivist."
 
 #: quodlibet/ext/editing/iconv.py:26
 msgid "Convert Encodings"
@@ -1268,41 +1268,46 @@ msgstr "Korrastab siltide halduris vigaselt kodeeritud siltide väärtused."
 
 #: quodlibet/ext/editing/iconv.py:31
 msgid "_Convert Encoding…"
-msgstr ""
+msgstr "_Teisenda kodeeringut…"
 
 #: quodlibet/ext/editing/kakasi.py:27
 msgid "Kana/Kanji Simple Inverter"
-msgstr ""
+msgstr "Lihtne kana/kanji teisendaja"
 
 #: quodlibet/ext/editing/kakasi.py:28
 msgid "Converts kana/kanji to romaji before renaming."
 msgstr ""
+"Konverteerib enne nime muutmist kana/kanji kirjapildid rōmaji kirjapildiks."
 
 #: quodlibet/ext/editing/kakasi.py:34
 msgid "Romanize _Japanese text"
-msgstr ""
+msgstr "Romaniseeri _jaapanikeelsed tekstid"
 
 #: quodlibet/ext/editing/kakasi.py:67
 msgid "Couldn't find the 'Kanji Kana Simple Inverter' (kakasi)."
 msgstr ""
+"Ei leidnud „Kanji Kana lihtsat teisendajat“ (Kanji Kana Simple Inverter - "
+"kakasi)."
 
 #: quodlibet/ext/editing/resub.py:18
 msgid "Regex Substitution"
-msgstr ""
+msgstr "Asendus regulaaravaldisega"
 
 #: quodlibet/ext/editing/resub.py:20
 msgid ""
 "Allows arbitrary regex substitutions (<tt>s/from/to/</tt>) when tagging or "
 "renaming files."
 msgstr ""
+"Võimaldab suvaliste regulaaravaldiste kasutamist asenduste tegemisel nii "
+"siltide kui failinimede muutmisel (<tt>s/algtekst/muudetudtekst/</tt>)."
 
 #: quodlibet/ext/editing/titlecase.py:20
 msgid "Title Case"
-msgstr ""
+msgstr "Tekst Suure Algustähega"
 
 #: quodlibet/ext/editing/titlecase.py:21
 msgid "Title-cases tag values in the tag editor."
-msgstr ""
+msgstr "Võimaldab siltide halduses muuta teksti esitähed suurtähtedeks."
 
 #: quodlibet/ext/editing/titlecase.py:39
 msgid "Title-_case Value"
@@ -3646,11 +3651,11 @@ msgstr ""
 
 #: quodlibet/ext/query/pythonexpression.py:19
 msgid "🐍Use Python expressions in queries."
-msgstr ""
+msgstr "🐍Kasuta otsingutes Pythoni avaldisi."
 
 #: quodlibet/ext/query/pythonexpression.py:21
 msgid "@(python: expression)"
-msgstr ""
+msgstr "@(python: avaldis)"
 
 #: quodlibet/ext/query/pythonexpression.py:23
 msgid ""
@@ -4177,7 +4182,7 @@ msgstr ""
 #: quodlibet/ext/songsmenu/duplicates.py:345
 #, python-format
 msgid "Duplicate key expression is '%s'"
-msgstr ""
+msgstr "Topeltvõtme avaldis on „%s“"
 
 #: quodlibet/ext/songsmenu/duplicates.py:362
 msgid "Duplicates Browser"
@@ -4192,6 +4197,8 @@ msgid ""
 "Accepts QL tag expressions like <tt>~artist~title</tt> or "
 "<tt>musicbrainz_track_id</tt>"
 msgstr ""
+"Saab aru ka QL-siltide avaldistest nagu <tt>~artist~title</tt> või "
+"<tt>musicbrainz_track_id</tt>"
 
 #: quodlibet/ext/songsmenu/duplicates.py:408
 msgid "_Group duplicates by:"
@@ -5011,7 +5018,7 @@ msgstr ""
 #: quodlibet/operon/commands.py:60 quodlibet/operon/commands.py:100
 #: quodlibet/operon/commands.py:539 quodlibet/qltk/data_editors.py:373
 msgid "Description"
-msgstr ""
+msgstr "Kirjedlus"
 
 #: quodlibet/operon/commands.py:60 quodlibet/operon/commands.py:539
 #: quodlibet/qltk/edittags.py:520
@@ -5073,7 +5080,7 @@ msgstr "Eemalda sildid"
 
 #: quodlibet/operon/commands.py:376 quodlibet/operon/commands.py:444
 msgid "Value is a regular expression"
-msgstr ""
+msgstr "Väärtus regulaaravaldisena"
 
 #: quodlibet/operon/commands.py:378
 msgid "Remove all tags"
@@ -5281,19 +5288,19 @@ msgstr ""
 
 #: quodlibet/player/gstbe/prefs.py:83
 msgid "Use JACK for playback if available"
-msgstr "Kui JACK-taustateenus on saadaval, siis kasuta seda taasesitusel"
+msgstr "Kui JACK-taustateenus on saadaval, siis kasuta taasesitusel seda"
 
 #: quodlibet/player/gstbe/prefs.py:87
 msgid "Uses `jackaudiosink` for playbin sink if it can be detected"
-msgstr ""
+msgstr "Kui ta on tuvastatav, siis helineeluna on kasutusel „jackaudiosink“"
 
 #: quodlibet/player/gstbe/prefs.py:90
 msgid "Auto-connect to JACK output devices"
-msgstr ""
+msgstr "Ühenda automaatselt JACK-taustateenuse väljundseadmetega"
 
 #: quodlibet/player/gstbe/prefs.py:94
 msgid "Tells `jackaudiosink` to auto-connect"
-msgstr ""
+msgstr "Selle eelistusega „jackaudiosink“ loob ühenduse automaatselt"
 
 #: quodlibet/player/gstbe/util.py:152
 #, python-format
@@ -5525,11 +5532,11 @@ msgstr "_Muuda"
 
 #: quodlibet/qltk/data_editors.py:364
 msgid "Tag expression"
-msgstr ""
+msgstr "Sildi avaldis"
 
 #: quodlibet/qltk/data_editors.py:394 quodlibet/qltk/data_editors.py:404
 msgid "Tag expression e.g. people:real or ~album~year"
-msgstr ""
+msgstr "Sildi avaldis, näiteks people:real või ~album~year"
 
 #: quodlibet/qltk/data_editors.py:396
 msgid "Enter new tag"
@@ -5537,7 +5544,7 @@ msgstr ""
 
 #: quodlibet/qltk/data_editors.py:406
 msgid "Edit tag expression"
-msgstr ""
+msgstr "Sildi avaldise muutmine"
 
 #: quodlibet/qltk/delete.py:37
 msgid "Files:"
@@ -6421,7 +6428,7 @@ msgstr "_Käivitamisel jätka taasesitust"
 msgid ""
 "If music is playing on shutdown, automatically start playing on next startup"
 msgstr ""
-"Kui rakenduse sulgemisel oli muusaika esitamisel, siis käivitamisel jätka "
+"Kui rakenduse sulgemisel oli muusika esitamisel, siis käivitamisel jätka "
 "sama loo esitamist"
 
 #: quodlibet/qltk/prefs.py:542
@@ -6648,7 +6655,7 @@ msgstr "_Hüppa esitamisel oleva loo juurde"
 
 #: quodlibet/qltk/quodlibetwindow.py:933
 msgid "_File"
-msgstr "_Fail"
+msgstr "_Failid"
 
 #: quodlibet/qltk/quodlibetwindow.py:934
 msgid "_Song"
