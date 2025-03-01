@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: quodlibet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-25 11:38+0100\n"
-"PO-Revision-Date: 2025-01-18 08:46+0000\n"
-"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
+"PO-Revision-Date: 2025-03-01 21:13+0000\n"
+"Last-Translator: Kristian Laakkonen <kristian.laakkonen@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/quodlibet/"
 "quodlibet/fi/>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: quodlibet/browsers/albums/main.py:226
 #: quodlibet/browsers/covergrid/main.py:57
@@ -3920,9 +3920,8 @@ msgid "unidentified Squeezebox server"
 msgstr "tunnistamaton Squeezebox-palvelin"
 
 #: quodlibet/ext/_shared/squeezebox/server.py:38
-#, fuzzy
 msgid "unidentified Squeezebox player: {self!r}"
-msgstr "tunnistamaton Squeezebox-palvelin: %r"
+msgstr "tunnistamaton Squeezebox-toistin: {self!r}"
 
 #: quodlibet/ext/_shared/squeezebox/util.py:15
 msgid "Choose Squeezebox player"
@@ -4939,16 +4938,16 @@ msgstr "Luo järjestystunnisteet"
 
 #: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "Guesses sort tags for albums and people."
-msgstr ""
+msgstr "Arvaa järjestyksen määräävät tunnisteet albumeille ja tekijöille."
 
 #: quodlibet/ext/songsmenu/makesorttags.py:83
 msgid "e.g."
-msgstr ""
+msgstr "esim."
 
 #: quodlibet/ext/songsmenu/makesorttags.py:88
 #, python-format
 msgid "Applies to tags: <tt>%s</tt>."
-msgstr ""
+msgstr "Vaikuttaa tunnisteisiin: <tt>%s</tt>."
 
 #: quodlibet/ext/songsmenu/playlist.py:36
 msgid "Export as M3U / PLS Playlist File"
@@ -5075,12 +5074,11 @@ msgstr "Erota albumin levynumero albumin nimestä."
 
 #: quodlibet/ext/songsmenu/splitting.py:79
 msgid "Split Genre"
-msgstr ""
+msgstr "Erota tyylilajit"
 
 #: quodlibet/ext/songsmenu/splitting.py:80
-#, fuzzy
 msgid "Split a single genre tag into multiple tags."
-msgstr "Jaa _useampaan arvoon"
+msgstr "Jaa yksittäinen tyylilajitunniste useammaksi tunnisteeksi."
 
 #: quodlibet/ext/songsmenu/tapbpm.py:23 quodlibet/ext/songsmenu/tapbpm.py:32
 #: quodlibet/ext/songsmenu/tapbpm.py:61
@@ -6462,7 +6460,7 @@ msgstr "Liitännäisiä ei löytynyt."
 
 #: quodlibet/qltk/pluginwin.py:333
 msgid "(undocumented)"
-msgstr ""
+msgstr "(ei kuvausta)"
 
 #: quodlibet/qltk/pluginwin.py:373
 msgid "Plugins"
